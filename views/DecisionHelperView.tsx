@@ -6,14 +6,14 @@ import { CardDetailModal } from '../components/CardDetailModal';
 import { 
   Scale, 
   Sparkles, 
-  ArrowRight, 
   RotateCcw, 
   Lightbulb, 
   ShieldCheck, 
   BookOpen, 
   Save, 
   Check, 
-  HelpCircle 
+  HelpCircle,
+  ArrowRight
 } from 'lucide-react';
 
 interface DecisionHelperViewProps {
@@ -90,26 +90,26 @@ export const DecisionHelperView: React.FC<DecisionHelperViewProps> = ({
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-6 sm:py-10 px-4 space-y-8">
+    <div className="w-full max-w-5xl mx-auto py-8 sm:py-12 px-4 space-y-10">
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/30 text-indigo-300 text-xs font-semibold mb-3">
+      <div className="text-center max-w-2xl mx-auto space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/25 text-indigo-300 text-xs font-semibold">
           <Scale className="w-3.5 h-3.5" />
-          {isVi ? 'Gương Soi Quyết Định • Không Chọn Thay' : 'Decision Mirror • Personal Agency'}
+          <span>{isVi ? 'Gương Soi Quyết Định • Không Chọn Thay' : 'Decision Mirror • Personal Agency'}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
           {isVi ? 'Soi Rọi Quyết Định Cá Nhân' : 'Dual-Path Decision Mirror'}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-2">
+        <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
           {isVi
             ? 'Tarot không chọn thay bạn con đường nào "tốt hơn". Mỗi lá bài giúp bạn lắng nghe động lực, nỗi sợ và giá trị cốt lõi đằng sau từng lựa chọn.'
-            : 'Tarot does not choose for you. Each card reflects the underlying motives, psychological trade-offs, and core values of each path.'}
+            : 'Tarot does not dictate which path is better. Each archetype reflects the underlying motives, psychological trade-offs, and core values of each choice.'}
         </p>
       </div>
 
       {!isDrawn ? (
         /* Input options */
-        <div className="max-w-2xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl space-y-6 animate-in fade-in duration-300">
+        <div className="max-w-xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-6">
           <div className="space-y-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-2">
@@ -119,7 +119,7 @@ export const DecisionHelperView: React.FC<DecisionHelperViewProps> = ({
                 type="text"
                 value={optionA}
                 onChange={(e) => setOptionA(e.target.value)}
-                placeholder={isVi ? 'Ví dụ: Nhận lời đề nghị công việc mới...' : 'E.g., Accept the new job offer...'}
+                placeholder={isVi ? 'Ví dụ: Nhận lời đề nghị chuyển việc mới...' : 'E.g., Accept the new job offer...'}
                 className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400/50 transition-colors"
               />
             </div>
@@ -132,206 +132,186 @@ export const DecisionHelperView: React.FC<DecisionHelperViewProps> = ({
                 type="text"
                 value={optionB}
                 onChange={(e) => setOptionB(e.target.value)}
-                placeholder={isVi ? 'Ví dụ: Tiếp tục ở lại vị trí hiện tại và học thêm...' : 'E.g., Stay at current company and upskill...'}
+                placeholder={isVi ? 'Ví dụ: Ở lại vị trí hiện tại và học thêm kỹ năng mới...' : 'E.g., Stay in current role and pursue upskilling...'}
                 className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-400/50 transition-colors"
               />
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 text-[11px] text-slate-400 flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+          <div className="flex items-center gap-2 text-[11px] text-slate-500">
+            <ShieldCheck className="w-4 h-4 text-amber-400/70" />
             <span>
               {isVi
-                ? 'Quyết định cuối cùng luôn thuộc về trực giác và sự tỉnh thức của bạn.'
-                : 'The final decision always belongs to your intuition and sound judgment.'}
+                ? 'Công cụ tôn trọng hoàn toàn quyền tự do ý chí và sự lựa chọn độc lập của bạn.'
+                : 'Built with complete respect for your free will and independent judgment.'}
             </span>
           </div>
 
-          <div className="flex justify-center pt-2">
-            <button
-              onClick={handleDrawDecision}
-              disabled={!optionA.trim() || !optionB.trim()}
-              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg transition-all active:scale-95 disabled:opacity-50"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>{isVi ? 'Soi Rọi 2 Lựa Chọn' : 'Mirror Both Paths'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            onClick={handleDrawDecision}
+            disabled={!optionA.trim() || !optionB.trim()}
+            className="w-full py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition-all disabled:opacity-40 flex items-center justify-center gap-2"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>{isVi ? 'Rút Bài Soi Rọi 2 Lựa Chọn' : 'Draw Decision Mirror'}</span>
+          </button>
         </div>
       ) : (
-        /* Results View */
-        <div className="space-y-8 animate-in fade-in duration-300">
-          {/* Top Reset button */}
-          <div className="flex justify-end">
+        /* Decision Cards Revealed */
+        <div className="space-y-10">
+          <div className="flex justify-between items-center bg-slate-900/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-300">
+                {isVi ? 'So Sánh Song Song' : 'Dual-Path Analysis'}
+              </span>
+              <p className="text-xs sm:text-sm font-serif font-bold text-amber-100 mt-0.5">
+                [A: {optionA}] <span className="text-slate-500 font-sans font-normal">vs</span> [B: {optionB}]
+              </p>
+            </div>
             <button
               onClick={handleReset}
-              className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition-colors border border-slate-800"
+              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition-colors"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              {isVi ? 'Cân nhắc quyết định khác' : 'Explore Another Decision'}
+              <span>{isVi ? 'Đặt câu hỏi khác' : 'New Question'}</span>
             </button>
           </div>
 
-          {/* Paths comparison */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {/* Path A */}
+          {/* 3 Cards Display (Choice A - Core Anchor - Choice B) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-start">
+            {/* Card A */}
             {cardA && (
-              <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-amber-400/30 shadow-2xl flex flex-col justify-between space-y-6">
-                <div>
-                  <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-serif font-bold uppercase tracking-wider block w-fit mb-3">
-                    {isVi ? 'Góc nhìn cho Lựa chọn A' : 'Perspective on Option A'}
-                  </span>
-                  <h3 className="font-serif font-bold text-xl text-amber-100 mb-2">
-                    "{optionA}"
-                  </h3>
-
-                  <div className="flex flex-col items-center my-6">
-                    <TarotCardView
-                      card={cardA}
-                      isFlipped={true}
-                      size="md"
-                      language={preferences.language}
-                    />
-                    <button
-                      onClick={() => setInspectingCard(cardA)}
-                      className="mt-3 text-xs text-amber-400 hover:text-amber-300 underline"
-                    >
-                      {isVi ? 'Xem biểu tượng lá bài' : 'Inspect Symbolism'}
-                    </button>
-                  </div>
-
-                  <div className="space-y-3 text-xs sm:text-sm text-slate-300">
-                    <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800">
-                      <strong className="text-amber-300 block mb-1">
-                        {isVi ? 'Động lực & Tâm thế phản chiếu:' : 'Motives & Mindset:'}
-                      </strong>
-                      <p>{isVi ? cardA.uprightMeaningVi : cardA.uprightMeaning}</p>
-                    </div>
-
-                    <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800">
-                      <strong className="text-slate-200 block mb-1">
-                        {isVi ? 'Câu hỏi tự vấn:' : 'Self-Reflection Prompt:'}
-                      </strong>
-                      <p className="italic">"{isVi ? cardA.reflectionPromptsVi[0] : cardA.reflectionPrompts[0]}"</p>
-                    </div>
-                  </div>
+              <div className="p-6 rounded-3xl bg-slate-900/90 border border-amber-400/20 flex flex-col items-center space-y-4">
+                <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-serif font-bold text-center">
+                  {isVi ? `Lựa chọn A: ${optionA}` : `Option A: ${optionA}`}
+                </span>
+                <TarotCardView
+                  card={cardA}
+                  isFlipped={true}
+                  size="sm"
+                  language={preferences.language}
+                />
+                <div className="text-center space-y-1">
+                  <h4 className="font-serif font-bold text-sm text-amber-100">
+                    {isVi ? cardA.nameVi : cardA.name}
+                  </h4>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {isVi ? cardA.uprightMeaningVi : cardA.uprightMeaning}
+                  </p>
                 </div>
+                <button
+                  onClick={() => setInspectingCard(cardA)}
+                  className="text-[11px] text-amber-400 hover:underline flex items-center gap-1 font-medium"
+                >
+                  <BookOpen className="w-3 h-3" />
+                  <span>{isVi ? 'Chi tiết biểu tượng' : 'Inspect Details'}</span>
+                </button>
               </div>
             )}
 
-            {/* Path B */}
-            {cardB && (
-              <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-indigo-400/30 shadow-2xl flex flex-col justify-between space-y-6">
-                <div>
-                  <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/30 text-indigo-300 text-xs font-serif font-bold uppercase tracking-wider block w-fit mb-3">
-                    {isVi ? 'Góc nhìn cho Lựa chọn B' : 'Perspective on Option B'}
-                  </span>
-                  <h3 className="font-serif font-bold text-xl text-amber-100 mb-2">
-                    "{optionB}"
-                  </h3>
-
-                  <div className="flex flex-col items-center my-6">
-                    <TarotCardView
-                      card={cardB}
-                      isFlipped={true}
-                      size="md"
-                      language={preferences.language}
-                    />
-                    <button
-                      onClick={() => setInspectingCard(cardB)}
-                      className="mt-3 text-xs text-indigo-300 hover:text-indigo-200 underline"
-                    >
-                      {isVi ? 'Xem biểu tượng lá bài' : 'Inspect Symbolism'}
-                    </button>
-                  </div>
-
-                  <div className="space-y-3 text-xs sm:text-sm text-slate-300">
-                    <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800">
-                      <strong className="text-indigo-300 block mb-1">
-                        {isVi ? 'Động lực & Tâm thế phản chiếu:' : 'Motives & Mindset:'}
-                      </strong>
-                      <p>{isVi ? cardB.uprightMeaningVi : cardB.uprightMeaning}</p>
-                    </div>
-
-                    <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800">
-                      <strong className="text-slate-200 block mb-1">
-                        {isVi ? 'Câu hỏi tự vấn:' : 'Self-Reflection Prompt:'}
-                      </strong>
-                      <p className="italic">"{isVi ? cardB.reflectionPromptsVi[0] : cardB.reflectionPrompts[0]}"</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Anchor: Core Value Synthesis */}
-          {cardCenter && (
-            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-amber-400/20 shadow-xl flex flex-col md:flex-row items-center gap-6">
-              <div className="flex-shrink-0">
+            {/* Center Core Anchor */}
+            {cardCenter && (
+              <div className="p-6 rounded-3xl bg-indigo-950/20 border border-indigo-500/25 flex flex-col items-center space-y-4">
+                <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/30 text-indigo-300 text-xs font-serif font-bold text-center">
+                  {isVi ? 'Điểm Neo Giá Trị Cốt Lõi' : 'Core Value Anchor'}
+                </span>
                 <TarotCardView
                   card={cardCenter}
                   isFlipped={true}
                   size="sm"
                   language={preferences.language}
                 />
+                <div className="text-center space-y-1">
+                  <h4 className="font-serif font-bold text-sm text-amber-100">
+                    {isVi ? cardCenter.nameVi : cardCenter.name}
+                  </h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {isVi ? cardCenter.symbolismVi : cardCenter.symbolism}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setInspectingCard(cardCenter)}
+                  className="text-[11px] text-indigo-300 hover:underline flex items-center gap-1 font-medium"
+                >
+                  <BookOpen className="w-3 h-3" />
+                  <span>{isVi ? 'Chi tiết biểu tượng' : 'Inspect Details'}</span>
+                </button>
               </div>
-              <div className="space-y-2 text-center md:text-left">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400">
-                  {isVi ? 'Điểm Neo Giá Trị Cốt Lõi Chung' : 'Underlying Core Value Anchor'}
-                </span>
-                <h4 className="font-serif font-bold text-lg text-amber-100">
-                  {isVi ? cardCenter.nameVi : cardCenter.name}
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  {isVi
-                    ? `Dù bạn chọn con đường nào, giá trị sâu thẳm cần gìn giữ là: ${cardCenter.uprightMeaningVi}`
-                    : `Whichever path you embrace, the essential inner value to honor is: ${cardCenter.uprightMeaning}`}
-                </p>
-              </div>
-            </div>
-          )}
+            )}
 
-          {/* Notes & Journaling */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
-            <h3 className="font-serif font-bold text-lg text-amber-100 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-amber-400" />
-              {isVi ? 'Đúc Kết Suy Ngẫm Của Tôi' : 'My Decision Journal & Realizations'}
+            {/* Card B */}
+            {cardB && (
+              <div className="p-6 rounded-3xl bg-slate-900/90 border border-indigo-400/20 flex flex-col items-center space-y-4">
+                <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/30 text-indigo-300 text-xs font-serif font-bold text-center">
+                  {isVi ? `Lựa chọn B: ${optionB}` : `Option B: ${optionB}`}
+                </span>
+                <TarotCardView
+                  card={cardB}
+                  isFlipped={true}
+                  size="sm"
+                  language={preferences.language}
+                />
+                <div className="text-center space-y-1">
+                  <h4 className="font-serif font-bold text-sm text-amber-100">
+                    {isVi ? cardB.nameVi : cardB.name}
+                  </h4>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {isVi ? cardB.uprightMeaningVi : cardB.uprightMeaning}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setInspectingCard(cardB)}
+                  className="text-[11px] text-indigo-300 hover:underline flex items-center gap-1 font-medium"
+                >
+                  <BookOpen className="w-3 h-3" />
+                  <span>{isVi ? 'Chi tiết biểu tượng' : 'Inspect Details'}</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Synthesis Reflection Notes */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-4">
+            <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100 flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-amber-400" />
+              <span>{isVi ? 'Ghi Chép Phản Chiếu Sau Khi Quan Sát 2 Lựa Chọn' : 'My Decision Reflections'}</span>
             </h3>
+
             <textarea
               value={decisionNotes}
               onChange={(e) => setDecisionNotes(e.target.value)}
               rows={4}
               placeholder={
                 isVi
-                  ? 'Sau khi nhìn vào 2 góc nhìn biểu tượng, tôi nhận ra điều gì quan trọng nhất với mình?...'
-                  : 'Having looked into both symbolic mirrors, what truth emerges for you?...'
+                  ? 'Tôi nhận thấy điều gì về cảm xúc của mình với lựa chọn A? Lựa chọn B chạm vào nỗi sợ hay khát vọng nào? Điểm neo giá trị cốt lõi nhắc nhở tôi điều gì?...'
+                  : 'What internal feelings surface with Option A vs. Option B? What does the Core Value anchor remind you of?...'
               }
               className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400/50 resize-none transition-colors"
             />
-            <div className="flex justify-between items-center pt-2">
+
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
               <span className="text-xs text-slate-400">
                 {savedSuccess && (
                   <span className="text-emerald-400 font-semibold flex items-center gap-1">
                     <Check className="w-4 h-4" />
-                    {isVi ? 'Đã lưu vào Nhật ký!' : 'Saved to Journal!'}
+                    <span>{isVi ? 'Đã lưu vào Nhật ký!' : 'Saved to Journal!'}</span>
                   </span>
                 )}
               </span>
+
               <button
                 onClick={handleSaveDecision}
-                className="px-6 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold flex items-center gap-2 transition-colors"
+                className="px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold flex items-center gap-2 transition-colors shadow-sm"
               >
                 <Save className="w-4 h-4" />
-                <span>{isVi ? 'Lưu Ghi Chép' : 'Save Notes'}</span>
+                <span>{isVi ? 'Lưu Vào Nhật Ký' : 'Save to Journal'}</span>
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Detail Modal */}
+      {/* Modal */}
       <CardDetailModal
         card={inspectingCard}
         isOpen={Boolean(inspectingCard)}

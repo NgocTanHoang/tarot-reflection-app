@@ -4,11 +4,8 @@ import {
   Settings, 
   Globe, 
   RotateCw, 
-  Volume2, 
   ShieldCheck, 
   Trash2, 
-  Download, 
-  Sparkles,
   HeartHandshake,
   Sun,
   Moon
@@ -32,12 +29,12 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   const isDark = preferences.theme !== 'light';
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-6 sm:py-10 px-4 space-y-8">
+    <div className="w-full max-w-4xl mx-auto py-8 sm:py-12 px-4 space-y-8">
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-3">
+      <div className="text-center max-w-2xl mx-auto space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-semibold">
           <Settings className="w-3.5 h-3.5" />
-          {isVi ? 'Cấu Hình Trải Nghiệm' : 'Preferences & Charter'}
+          <span>{isVi ? 'Cấu Hình Trải Nghiệm' : 'Preferences & Charter'}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
           {isVi ? 'Cài Đặt & Triết Lý Ứng Dụng' : 'Settings & Principles'}
@@ -45,15 +42,15 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </div>
 
       {/* Preferences Section */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-6">
-        <h3 className="font-serif font-bold text-lg text-amber-100 flex items-center gap-2">
-          <Settings className="w-5 h-5 text-amber-400" />
-          {isVi ? 'Tùy Chọn Trải Nghiệm' : 'App Settings'}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-6">
+        <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100 flex items-center gap-2">
+          <Settings className="w-4 h-4 text-amber-400" />
+          <span>{isVi ? 'Tùy Chọn Trải Nghiệm' : 'App Settings'}</span>
         </h3>
 
         <div className="space-y-4">
           {/* Theme Selection */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
             <div className="flex items-center gap-3">
               {isDark ? <Moon className="w-5 h-5 text-indigo-400" /> : <Sun className="w-5 h-5 text-amber-400" />}
               <div>
@@ -61,7 +58,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   {isVi ? 'Giao diện (Theme)' : 'Theme Mode'}
                 </span>
                 <span className="text-[11px] text-slate-400">
-                  {isVi ? 'Chế độ Tối (Huyền bí) hoặc Sáng (Trang nhã)' : 'Dark (Mystic) or Light (Clean Warm)'}
+                  {isVi ? 'Chế độ Tối (Đêm huyền bí) hoặc Sáng (Ấm áp)' : 'Dark (Mystic) or Light (Warm Paper)'}
                 </span>
               </div>
             </div>
@@ -70,7 +67,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 onClick={() => onUpdatePreferences({ theme: 'dark' })}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
                   isDark
-                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    ? 'bg-amber-400 text-slate-950 shadow-sm'
                     : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
@@ -81,7 +78,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 onClick={() => onUpdatePreferences({ theme: 'light' })}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
                   !isDark
-                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    ? 'bg-amber-400 text-slate-950 shadow-sm'
                     : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
@@ -92,7 +89,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
 
           {/* Language selection */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
             <div className="flex items-center gap-3">
               <Globe className="w-5 h-5 text-amber-400" />
               <div>
@@ -109,7 +106,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 onClick={() => onUpdatePreferences({ language: 'vi' })}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   isVi
-                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    ? 'bg-amber-400 text-slate-950 shadow-sm'
                     : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
@@ -119,7 +116,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 onClick={() => onUpdatePreferences({ language: 'en' })}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   !isVi
-                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    ? 'bg-amber-400 text-slate-950 shadow-sm'
                     : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
@@ -129,7 +126,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
 
           {/* Allow Reversed Cards */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
             <div className="flex items-center gap-3">
               <RotateCw className="w-5 h-5 text-indigo-400" />
               <div>
@@ -158,10 +155,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </div>
 
       {/* Philosophy & Charter */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-amber-400/20 space-y-4">
-        <h3 className="font-serif font-bold text-lg text-amber-100 flex items-center gap-2">
-          <ShieldCheck className="w-5 h-5 text-amber-400" />
-          {isVi ? 'Hiến Chương Phản Tỉnh & An Toàn Tâm Lý' : 'Reflective & Safety Charter'}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-amber-400/20 space-y-4">
+        <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100 flex items-center gap-2">
+          <ShieldCheck className="w-4 h-4 text-amber-400" />
+          <span>{isVi ? 'Hiến Chương Phản Tỉnh & An Toàn Tâm Lý' : 'Reflective & Safety Charter'}</span>
         </h3>
         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
           {isVi ? ETHICS_DISCLAIMER_VI : ETHICS_DISCLAIMER_EN}
@@ -171,15 +168,15 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-850 text-rose-300 border border-rose-500/30 text-xs font-semibold transition-colors"
         >
           <HeartHandshake className="w-4 h-4 text-rose-400" />
-          {isVi ? 'Xem danh sách đường dây nóng hỗ trợ tâm lý' : 'View Crisis Support Helplines'}
+          <span>{isVi ? 'Xem danh sách đường dây nóng hỗ trợ tâm lý' : 'View Crisis Support Helplines'}</span>
         </button>
       </div>
 
       {/* Data Management & Danger Zone */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
-        <h3 className="font-serif font-bold text-lg text-rose-200 flex items-center gap-2">
-          <Trash2 className="w-5 h-5 text-rose-400" />
-          {isVi ? 'Quản Lý Dữ Liệu Thiết Bị' : 'Device Data Management'}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-4">
+        <h3 className="font-serif font-bold text-base sm:text-lg text-rose-200 flex items-center gap-2">
+          <Trash2 className="w-4 h-4 text-rose-400" />
+          <span>{isVi ? 'Quản Lý Dữ Liệu Thiết Bị' : 'Device Data Management'}</span>
         </h3>
         <p className="text-xs text-slate-400">
           {isVi

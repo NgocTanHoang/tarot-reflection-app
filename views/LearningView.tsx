@@ -7,12 +7,11 @@ import {
   Wind, 
   Mountain, 
   Compass, 
-  CheckCircle2, 
-  XCircle, 
   HelpCircle, 
-  RotateCcw,
   BookOpen,
-  ArrowRight
+  ArrowRight,
+  CheckCircle2,
+  XCircle
 } from 'lucide-react';
 
 interface LearningViewProps {
@@ -105,24 +104,23 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
     if (currentQuestionIndex + 1 < quizQuestions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Finished
       setCurrentQuestionIndex(0);
       setScore(0);
     }
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-6 sm:py-10 px-4 space-y-8">
+    <div className="w-full max-w-5xl mx-auto py-8 sm:py-12 px-4 space-y-10">
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-3">
+      <div className="text-center max-w-2xl mx-auto space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-semibold">
           <Sparkles className="w-3.5 h-3.5" />
-          {isVi ? 'Học Biểu Tượng • Không Bói Toán' : 'Symbolic Mastery • No Superstition'}
+          <span>{isVi ? 'Học Biểu Tượng • Không Mê Tín' : 'Symbolic Knowledge • Psychological Depth'}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
           {isVi ? 'Học Biểu Tượng & Nguyên Mẫu Tâm Lý' : 'Tarot as a Symbolic Language'}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-2">
+        <p className="text-xs sm:text-sm text-slate-400">
           {isVi
             ? 'Khám phá triết lý đằng sau 4 nguyên tố, hành trình phát triển tâm thức và cách áp dụng vào cuộc sống.'
             : 'Understand the psychological framework behind the 4 elements, the archetypal Hero’s journey, and mindful self-inquiry.'}
@@ -130,12 +128,12 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center justify-center gap-2 sm:gap-4 border-b border-slate-800 pb-3">
+      <div className="flex items-center justify-center gap-2 sm:gap-3 border-b border-slate-800 pb-3">
         <button
           onClick={() => setActiveTab('elements')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 ${
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-2 ${
             activeTab === 'elements'
-              ? 'bg-amber-400/15 text-amber-300 border border-amber-400/30'
+              ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 font-semibold shadow-sm'
               : 'text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -145,9 +143,9 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
 
         <button
           onClick={() => setActiveTab('foolsJourney')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 ${
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-2 ${
             activeTab === 'foolsJourney'
-              ? 'bg-amber-400/15 text-amber-300 border border-amber-400/30'
+              ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 font-semibold shadow-sm'
               : 'text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -157,28 +155,28 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
 
         <button
           onClick={() => setActiveTab('quiz')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 ${
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-2 ${
             activeTab === 'quiz'
-              ? 'bg-amber-400/15 text-amber-300 border border-amber-400/30'
+              ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 font-semibold shadow-sm'
               : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <HelpCircle className="w-4 h-4 text-emerald-400" />
-          <span>{isVi ? 'Thử Thách Biểu Tượng' : 'Symbolic Practice Quiz'}</span>
+          <span>{isVi ? 'Thử Thách Biểu Tượng' : 'Practice Quiz'}</span>
         </button>
       </div>
 
       {/* TAB 1: 4 ELEMENTS */}
       {activeTab === 'elements' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in duration-300">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Fire */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-amber-500/30 space-y-4">
+          <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/90 border border-amber-500/25 space-y-4">
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30">
-                <Flame className="w-6 h-6 text-amber-400" />
+                <Flame className="w-5 h-5 text-amber-400" />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-lg text-amber-100">
+                <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100">
                   {isVi ? 'Lửa (Wands • Gậy)' : 'Fire (Wands)'}
                 </h3>
                 <span className="text-xs text-amber-400 font-medium">
@@ -191,20 +189,20 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
                 ? 'Đại diện cho ngọn lửa nội tâm, động lực hành động, sự nhiệt huyết và tinh thần dấn thân. Trong tâm lý học, đây là năng lượng thôi thúc bạn bắt đầu những thử nghiệm mới và vượt qua sức ì.'
                 : 'Embodying inner vitality, motivation, and creative spark. Psychologically, Fire is the drive to initiate, express authentic passion, and conquer stagnation.'}
             </p>
-            <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-xs text-slate-400">
+            <div className="p-3 bg-slate-950/70 rounded-xl border border-slate-800 text-xs text-slate-400">
               <strong className="text-amber-300">{isVi ? 'Câu hỏi phản tỉnh:' : 'Key Reflection:'}</strong>{' '}
               {isVi ? 'Điều gì đang thực sự thắp sáng năng lượng và động lực của tôi lúc này?' : 'What is genuinely sparking my motivation and vitality right now?'}
             </div>
           </div>
 
           {/* Water */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-cyan-500/30 space-y-4">
+          <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/90 border border-cyan-500/25 space-y-4">
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30">
-                <Droplets className="w-6 h-6 text-cyan-400" />
+                <Droplets className="w-5 h-5 text-cyan-400" />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-lg text-amber-100">
+                <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100">
                   {isVi ? 'Nước (Cups • Cốc)' : 'Water (Cups)'}
                 </h3>
                 <span className="text-xs text-cyan-400 font-medium">
@@ -217,20 +215,20 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
                 ? 'Đại diện cho thế giới nội cảm, tình yêu thương, sự thấu cảm và các mối quan hệ giữa con người. Nước nhắc nhở chúng ta đón nhận mọi cảm xúc mà không phán xét, từ niềm vui đến nỗi buồn.'
                 : 'Reflecting emotional landscapes, vulnerability, relationships, and intuition. Water teaches us to hold space for our feelings without judgment.'}
             </p>
-            <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-xs text-slate-400">
+            <div className="p-3 bg-slate-950/70 rounded-xl border border-slate-800 text-xs text-slate-400">
               <strong className="text-cyan-300">{isVi ? 'Câu hỏi phản tỉnh:' : 'Key Reflection:'}</strong>{' '}
               {isVi ? 'Trái tim tôi đang cảm thấy thế nào và tôi có đang lắng nghe cảm xúc thật của mình?' : 'How is my emotional heart feeling, and am I honoring my true boundaries?'}
             </div>
           </div>
 
           {/* Air */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-sky-500/30 space-y-4">
+          <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/90 border border-sky-500/25 space-y-4">
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-2xl bg-sky-500/10 border border-sky-500/30">
-                <Wind className="w-6 h-6 text-sky-400" />
+                <Wind className="w-5 h-5 text-sky-400" />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-lg text-amber-100">
+                <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100">
                   {isVi ? 'Khí (Swords • Kiếm)' : 'Air (Swords)'}
                 </h3>
                 <span className="text-xs text-sky-400 font-medium">
@@ -243,20 +241,20 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
                 ? 'Đại diện cho tâm trí lý tính, khả năng phân tích, giao tiếp và những suy nghĩ định hình nhận thức của chúng ta. Khí là công cụ cắt đứt sự ngộ nhận nhưng cũng cảnh báo nguy cơ suy nghĩ thái quá.'
                 : 'Representing cognition, communication, logic, and beliefs. Air cuts through deception with truth, while cautioning against anxiety and overthinking.'}
             </p>
-            <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-xs text-slate-400">
+            <div className="p-3 bg-slate-950/70 rounded-xl border border-slate-800 text-xs text-slate-400">
               <strong className="text-sky-300">{isVi ? 'Câu hỏi phản tỉnh:' : 'Key Reflection:'}</strong>{' '}
               {isVi ? 'Suy nghĩ này là sự thật khách quan hay chỉ là một câu chuyện tôi tự dệt nên?' : 'Is this thought an objective truth or a story I am telling myself?'}
             </div>
           </div>
 
           {/* Earth */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-emerald-500/30 space-y-4">
+          <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/90 border border-emerald-500/25 space-y-4">
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
-                <Mountain className="w-6 h-6 text-emerald-400" />
+                <Mountain className="w-5 h-5 text-emerald-400" />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-lg text-amber-100">
+                <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100">
                   {isVi ? 'Đất (Pentacles • Tiền)' : 'Earth (Pentacles)'}
                 </h3>
                 <span className="text-xs text-emerald-400 font-medium">
@@ -269,7 +267,7 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
                 ? 'Đại diện cho thế giới vật chất thực tế, sức khỏe thể chất, thói quen hàng ngày và sự kiên nhẫn tích lũy. Đất giúp ta đưa những ý tưởng trên trời neo đậu vững chắc vào đời sống thường nhật.'
                 : 'Embodying physical well-being, material stability, daily habits, and patience. Earth anchors ethereal ideas into realistic, consistent daily actions.'}
             </p>
-            <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-xs text-slate-400">
+            <div className="p-3 bg-slate-950/70 rounded-xl border border-slate-800 text-xs text-slate-400">
               <strong className="text-emerald-300">{isVi ? 'Câu hỏi phản tỉnh:' : 'Key Reflection:'}</strong>{' '}
               {isVi ? 'Hôm nay tôi đã chăm sóc cơ thể và hiện thực hóa mục tiêu bằng hành động cụ thể nào?' : 'How am I caring for my body and grounding my goals into practical routines today?'}
             </div>
@@ -279,9 +277,9 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
 
       {/* TAB 2: FOOL'S JOURNEY */}
       {activeTab === 'foolsJourney' && (
-        <div className="space-y-8 animate-in fade-in duration-300">
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800">
-            <h3 className="font-serif font-bold text-xl text-amber-100 mb-3">
+        <div className="space-y-6">
+          <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-2">
+            <h3 className="font-serif font-bold text-lg sm:text-xl text-amber-100">
               {isVi ? 'Hành Trình Chàng Khờ: 3 Giai Đoạn Trưởng Thành Tâm Lý' : "The Fool's Journey: 3 Developmental Stages"}
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -291,16 +289,16 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
             </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Stage 1 */}
-            <div className="p-6 rounded-3xl bg-slate-900/60 border border-amber-400/20 space-y-3">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400">
+            <div className="p-6 rounded-3xl bg-slate-900/80 border border-amber-400/20 space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">
                 {isVi ? 'Giai Đoạn 1 (Lá 0 – 7)' : 'Stage 1 (Cards 0 – 7)'}
               </span>
-              <h4 className="font-serif font-bold text-lg text-amber-100">
+              <h4 className="font-serif font-bold text-base sm:text-lg text-amber-100">
                 {isVi ? 'Định Hình Bản Ngã & Thế Giới Xã Hội' : 'Ego Formation & Social Integration'}
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 {isVi
                   ? 'Bắt đầu từ sự ngây thơ (The Fool), học hỏi công cụ (Magician), lắng nghe tiềm thức (High Priestess), đón nhận sự nuôi dưỡng (Empress) và thiết lập ranh giới xã hội (Emperor, Hierophant, Lovers, Chariot).'
                   : 'Starting with pure openness (The Fool), discovering agency (The Magician), intuition (High Priestess), nurturing (Empress), and social mastery (Emperor to Chariot).'}
@@ -308,14 +306,14 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
             </div>
 
             {/* Stage 2 */}
-            <div className="p-6 rounded-3xl bg-slate-900/60 border border-indigo-400/20 space-y-3">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-300">
+            <div className="p-6 rounded-3xl bg-slate-900/80 border border-indigo-400/20 space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-300">
                 {isVi ? 'Giai Đoạn 2 (Lá 8 – 14)' : 'Stage 2 (Cards 8 – 14)'}
               </span>
-              <h4 className="font-serif font-bold text-lg text-amber-100">
+              <h4 className="font-serif font-bold text-base sm:text-lg text-amber-100">
                 {isVi ? 'Khủng Hoảng Nội Tâm & Chiêm Nghiệm Cá Nhân' : 'Inner Crisis, Solitude & Transformation'}
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 {isVi
                   ? 'Đối diện với sự kiên định (Strength), lùi lại tĩnh lặng (The Hermit), chấp nhận quy luật vô thường (Wheel of Fortune), nhìn nhận công bằng (Justice), buông bỏ góc nhìn cũ (Hanged Man) và chuyển hóa sâu sắc (Death, Temperance).'
                   : 'Confronting inner resilience (Strength), conscious solitude (The Hermit), impermanence (Wheel of Fortune), surrendered perspectives (Hanged Man), and deep metamorphosis (Death).'}
@@ -323,14 +321,14 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
             </div>
 
             {/* Stage 3 */}
-            <div className="p-6 rounded-3xl bg-slate-900/60 border border-emerald-400/20 space-y-3">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-300">
+            <div className="p-6 rounded-3xl bg-slate-900/80 border border-emerald-400/20 space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-300">
                 {isVi ? 'Giai Đoạn 3 (Lá 15 – 21)' : 'Stage 3 (Cards 15 – 21)'}
               </span>
-              <h4 className="font-serif font-bold text-lg text-amber-100">
+              <h4 className="font-serif font-bold text-base sm:text-lg text-amber-100">
                 {isVi ? 'Giải Thoát Bản Thân & Sự Trọn Vẹn Hợp Nhất' : 'Transcendence & Holistic Integration'}
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 {isVi
                   ? 'Nhận diện chiếc bóng tâm lý (The Devil), phá vỡ ảo tưởng giả tạo (The Tower), thắp sáng niềm hy vọng (The Star), đi qua bóng tối vô thức (The Moon), rực rỡ thức tỉnh (The Sun), đánh giá cuộc đời (Judgement) và hòa nhập viên mãn (The World).'
                   : 'Integrating shadow dynamics (The Devil), shattering false structures (The Tower), rekindling hope (The Star), traversing unconscious fears (The Moon), celebrating vitality (The Sun), and completing wholeness (The World).'}
@@ -342,11 +340,11 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
 
       {/* TAB 3: PRACTICE QUIZ */}
       {activeTab === 'quiz' && (
-        <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-300">
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-amber-400/30 shadow-2xl space-y-6">
+        <div className="max-w-2xl mx-auto space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-amber-400/25 shadow-xl space-y-6">
             <div className="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3">
               <span className="font-bold text-amber-400 uppercase tracking-wider">
-                {isVi ? `Tình huống ${currentQuestionIndex + 1}/${quizQuestions.length}` : `Question ${currentQuestionIndex + 1}/${quizQuestions.length}`}
+                {isVi ? `Tình huống ${currentQuestionIndex + 1}/${quizQuestions.length}` : `Scenario ${currentQuestionIndex + 1}/${quizQuestions.length}`}
               </span>
               <span>
                 {isVi ? `Điểm phản tỉnh: ${score}` : `Score: ${score}`}
@@ -354,8 +352,8 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
             </div>
 
             {/* Scenario Box */}
-            <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
+            <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
                 {isVi ? 'Tình huống đời sống:' : 'Life Scenario:'}
               </span>
               <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
@@ -371,7 +369,7 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
             <div className="space-y-3">
               {options.map((opt, idx) => {
                 const isChosen = selectedOption === idx;
-                let btnStyle = 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300';
+                let btnStyle = 'bg-slate-950/70 border-slate-800 hover:border-slate-700 text-slate-300';
                 
                 if (showExplanation) {
                   if (opt.isCorrect) {
@@ -409,7 +407,7 @@ export const LearningView: React.FC<LearningViewProps> = ({ preferences }) => {
               <div className="pt-4 border-t border-slate-800 flex justify-end">
                 <button
                   onClick={handleNextQuestion}
-                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-lg"
+                  className="px-6 py-2.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-md"
                 >
                   <span>
                     {currentQuestionIndex + 1 < quizQuestions.length

@@ -8,11 +8,10 @@ import {
   Trash2, 
   Download, 
   Calendar, 
-  Layers, 
   Sparkles, 
   Eye, 
-  Share2,
-  Tag
+  Check,
+  Flame
 } from 'lucide-react';
 
 interface JournalViewProps {
@@ -66,13 +65,13 @@ export const JournalView: React.FC<JournalViewProps> = ({
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-6 sm:py-10 px-4 space-y-8">
+    <div className="w-full max-w-5xl mx-auto py-8 sm:py-12 px-4 space-y-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-semibold mb-2">
             <BookOpen className="w-3.5 h-3.5" />
-            {isVi ? 'Nhật Ký & Dấu Ấn Nội Tâm' : 'Reflection Journal & Logs'}
+            <span>{isVi ? 'Nhật Ký & Dấu Ấn Nội Tâm' : 'Reflection Journal & Logs'}</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
             {isVi ? 'Lịch Sử & Nhật Ký Phản Tỉnh' : 'Reading History & Journal'}
@@ -81,41 +80,39 @@ export const JournalView: React.FC<JournalViewProps> = ({
 
         <button
           onClick={handleExportJSON}
-          className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-2 transition-colors"
+          className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-300 text-xs font-semibold flex items-center gap-2 transition-colors"
         >
           <Download className="w-4 h-4 text-amber-400" />
           <span>{isVi ? 'Xuất dữ liệu (.json)' : 'Export Journal (.json)'}</span>
         </button>
       </div>
 
-      {/* Controls: Search, Filter, Favorite Toggle */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {/* Controls: Search & Favorite Toggle */}
+      <div className="flex flex-col sm:flex-row gap-3">
         {/* Search */}
-        <div className="relative sm:col-span-2">
+        <div className="relative flex-grow">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={isVi ? 'Tìm kiếm theo câu hỏi, lá bài, ghi chú...' : 'Search questions, cards, or notes...'}
-            className="w-full bg-slate-900 border border-slate-800 rounded-2xl pl-11 pr-4 py-3 text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-400/50 transition-colors"
+            className="w-full bg-slate-900 border border-slate-800 rounded-2xl pl-11 pr-4 py-3 text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-400/50 transition-colors shadow-inner"
           />
         </div>
 
         {/* Favorite toggle */}
-        <div className="flex items-center justify-end">
-          <button
-            onClick={() => setShowOnlyFavorites(!showOnlyFavorites)}
-            className={`w-full sm:w-auto px-4 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2 transition-colors ${
-              showOnlyFavorites
-                ? 'bg-rose-950/40 border-rose-500 text-rose-300'
-                : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Heart className={`w-4 h-4 ${showOnlyFavorites ? 'fill-rose-400 text-rose-400' : ''}`} />
-            <span>{isVi ? 'Chỉ xem Yêu thích' : 'Favorites Only'}</span>
-          </button>
-        </div>
+        <button
+          onClick={() => setShowOnlyFavorites(!showOnlyFavorites)}
+          className={`px-4 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${
+            showOnlyFavorites
+              ? 'bg-rose-950/40 border-rose-500 text-rose-300'
+              : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <Heart className={`w-4 h-4 ${showOnlyFavorites ? 'fill-rose-400 text-rose-400' : ''}`} />
+          <span>{isVi ? 'Yêu thích' : 'Favorites Only'}</span>
+        </button>
       </div>
 
       {/* Readings List */}
@@ -124,13 +121,13 @@ export const JournalView: React.FC<JournalViewProps> = ({
           {filteredReadings.map((r) => (
             <div
               key={r.id}
-              className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-amber-400/30 transition-all duration-300 shadow-xl space-y-6"
+              className="p-6 sm:p-7 rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-amber-400/30 transition-all duration-200 shadow-md space-y-5"
             >
               {/* Header of reading entry */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800/80 pb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-amber-400/10 text-amber-300 text-xs font-semibold">
+                    <span className="px-2.5 py-0.5 rounded-full bg-amber-400/10 text-amber-300 text-xs font-semibold border border-amber-400/20">
                       {r.topic}
                     </span>
                     <span className="text-xs text-slate-500">
@@ -143,7 +140,7 @@ export const JournalView: React.FC<JournalViewProps> = ({
                       })}
                     </span>
                   </div>
-                  <h3 className="font-serif font-bold text-lg text-amber-100 mt-2">
+                  <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100 mt-2">
                     "{r.question}"
                   </h3>
                 </div>
@@ -165,20 +162,20 @@ export const JournalView: React.FC<JournalViewProps> = ({
               </div>
 
               {/* Cards drawn */}
-              <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex flex-wrap gap-3 items-center">
                 {r.cards.map((c, idx) => (
                   <div
                     key={idx}
                     onClick={() => setInspectingCard(c.card)}
-                    className="cursor-pointer p-3 rounded-2xl bg-slate-950 border border-slate-850 hover:border-amber-400/40 flex items-center gap-3 transition-colors"
+                    className="cursor-pointer p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 hover:border-amber-400/40 flex items-center gap-3 transition-colors"
                   >
                     <img
                       src={c.card.imageUrl}
                       alt={c.card.name}
-                      className="w-10 h-14 object-cover rounded-lg"
+                      className="w-9 h-14 object-cover rounded-lg"
                     />
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400/70 block">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400/80 block">
                         {c.positionLabel}
                       </span>
                       <span className="text-xs font-serif font-bold text-slate-200">
@@ -197,7 +194,7 @@ export const JournalView: React.FC<JournalViewProps> = ({
               {/* Personal Notes / Realizations */}
               {r.personalNotes && (
                 <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 text-xs sm:text-sm text-slate-300 space-y-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300/80 block">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300/90 block">
                     {isVi ? 'Ghi chép suy ngẫm cá nhân:' : 'Personal Realizations:'}
                   </span>
                   <p className="whitespace-pre-line leading-relaxed">{r.personalNotes}</p>
@@ -206,7 +203,7 @@ export const JournalView: React.FC<JournalViewProps> = ({
 
               {/* Action plan committed */}
               {r.userReflections && (
-                <div className="p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20 text-xs text-emerald-200 flex items-center gap-2">
+                <div className="p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/25 text-xs text-emerald-200 flex items-center gap-2">
                   <span className="font-bold">{isVi ? 'Hành động cam kết:' : 'Committed Action:'}</span>
                   <span>{r.userReflections}</span>
                 </div>

@@ -1,68 +1,84 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarot Reflection App - Tấm Gương Tự Phản Tỉnh Biểu Tượng</title>
+    <title>Tarot Reflection - Tấm Gương Tự Phản Tỉnh Biểu Tượng</title>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --font-body: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             --font-serif: 'Lora', 'Playfair Display', Georgia, serif;
-            --gold: #d4af37;
-            --gold-light: #fef08a;
-            --midnight: #020617;
-            --app-bg: #020617;
+            --app-bg: #070a13;
             --app-text: #f8fafc;
+            --surface-primary: #0f1424;
+            --surface-secondary: #151b30;
+            --border-subtle: rgba(212, 175, 55, 0.15);
+            --gold-accent: #e5be65;
+            --gold-muted: #bda255;
         }
 
-        /* Light Theme Variable Overrides */
+        /* Light Mode: Warm Textured Paper & Rich Editorial Ink */
         [data-theme="light"], .light-theme {
-            --app-bg: #fcfbf8;
-            --app-text: #0f172a;
-            --gold: #b48c25;
-            --gold-light: #854d0e;
+            --app-bg: #faf7f2;
+            --app-text: #1a202c;
+            --surface-primary: #ffffff;
+            --surface-secondary: #f4efe6;
+            --border-subtle: #e5ded3;
+            --gold-accent: #a87e22;
+            --gold-muted: #8c6919;
         }
         
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: var(--font-body);
             background-color: var(--app-bg);
             color: var(--app-text);
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Light mode comprehensive element tuning */
+        .font-serif {
+            font-family: var(--font-serif);
+            font-feature-settings: "kern" 1, "liga" 1;
+        }
+
+        /* Light Theme Overrides */
         [data-theme="light"] body,
         .light-theme {
-            background-color: #fcfbf8 !important;
-            color: #0f172a !important;
+            background-color: #faf7f2 !important;
+            color: #1a202c !important;
         }
 
         [data-theme="light"] .bg-slate-950,
         .light-theme .bg-slate-950 {
-            background-color: #f6f3eb !important;
+            background-color: #faf7f2 !important;
         }
 
         [data-theme="light"] .bg-slate-900,
         .light-theme .bg-slate-900 {
             background-color: #ffffff !important;
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            border-color: #eae3d6 !important;
+            box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.05);
         }
 
+        [data-theme="light"] .bg-slate-900\/90,
         [data-theme="light"] .bg-slate-900\/80,
         [data-theme="light"] .bg-slate-900\/60,
-        [data-theme="light"] .bg-slate-900\/90,
+        .light-theme .bg-slate-900\/90,
         .light-theme .bg-slate-900\/80,
-        .light-theme .bg-slate-900\/60,
-        .light-theme .bg-slate-900\/90 {
+        .light-theme .bg-slate-900\/60 {
             background-color: rgba(255, 255, 255, 0.95) !important;
+            border-color: #eae3d6 !important;
             box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
         }
 
@@ -72,14 +88,15 @@
         .light-theme .bg-slate-950\/60,
         .light-theme .bg-slate-950\/80,
         .light-theme .bg-slate-950\/95 {
-            background-color: #f8f6f0 !important;
+            background-color: #f5f0e6 !important;
+            border-color: #eae3d6 !important;
         }
 
         [data-theme="light"] .text-amber-100,
         [data-theme="light"] .text-amber-200,
         .light-theme .text-amber-100,
         .light-theme .text-amber-200 {
-            color: #1e293b !important;
+            color: #1a202c !important;
         }
 
         [data-theme="light"] .text-slate-100,
@@ -88,17 +105,17 @@
         .light-theme .text-slate-100,
         .light-theme .text-slate-200,
         .light-theme .text-slate-300 {
-            color: #334155 !important;
+            color: #2d3748 !important;
         }
 
         [data-theme="light"] .text-slate-400,
         .light-theme .text-slate-400 {
-            color: #64748b !important;
+            color: #596780 !important;
         }
 
         [data-theme="light"] .text-slate-500,
         .light-theme .text-slate-500 {
-            color: #94a3b8 !important;
+            color: #8c9ba5 !important;
         }
 
         [data-theme="light"] .border-slate-800,
@@ -107,7 +124,7 @@
         .light-theme .border-slate-800,
         .light-theme .border-slate-850,
         .light-theme .border-slate-900 {
-            border-color: #e5ded4 !important;
+            border-color: #e5ded2 !important;
         }
 
         [data-theme="light"] .border-amber-400\/20,
@@ -118,21 +135,21 @@
         .light-theme .border-amber-400\/30,
         .light-theme .border-amber-500\/20,
         .light-theme .border-amber-500\/30 {
-            border-color: rgba(180, 140, 37, 0.35) !important;
+            border-color: rgba(168, 126, 34, 0.35) !important;
         }
 
         [data-theme="light"] .bg-amber-400\/10,
         [data-theme="light"] .bg-amber-500\/10,
         .light-theme .bg-amber-400\/10,
         .light-theme .bg-amber-500\/10 {
-            background-color: rgba(212, 175, 55, 0.15) !important;
+            background-color: rgba(168, 126, 34, 0.1) !important;
         }
 
         [data-theme="light"] .text-amber-300,
         [data-theme="light"] .text-amber-400,
         .light-theme .text-amber-300,
         .light-theme .text-amber-400 {
-            color: #9a6f19 !important;
+            color: #936b15 !important;
         }
 
         [data-theme="light"] input,
@@ -140,140 +157,53 @@
         .light-theme input,
         .light-theme textarea {
             background-color: #ffffff !important;
-            color: #0f172a !important;
+            color: #1a202c !important;
             border-color: #dcd3c5 !important;
         }
 
-        [data-theme="light"] .bg-grain {
-            opacity: 0.05;
-        }
-        
-        .font-serif {
-            font-family: var(--font-serif);
-            font-feature-settings: "kern" 1, "liga" 1;
-        }
-
-        /* Ambient Background Grain */
+        /* Ambient Celestial Stardust */
         .bg-grain {
             position: fixed;
             inset: 0;
-            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-            opacity: 0.15;
+            background-image: radial-gradient(rgba(229, 190, 101, 0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Floating Sparkles */
-        .sparkle {
-            position: absolute;
-            background: var(--gold);
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: float 15s infinite linear;
-            opacity: 0.25;
-            pointer-events: none;
+        [data-theme="light"] .bg-grain {
+            background-image: radial-gradient(rgba(100, 116, 139, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        /* Smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 20, 36, 0.5);
+        }
+        [data-theme="light"] ::-webkit-scrollbar-track {
+            background: #f0eae1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.25);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.45);
         }
 
-        /* Card Perspective and 3D effects */
+        /* 3D Perspective */
         .perspective {
-            perspective: 1500px;
-        }
-
-        .card-inner {
-            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform-style: preserve-3d;
-        }
-
-        .card-flipped {
-            transform: rotateY(180deg) scale(1.05);
-        }
-
-        .card-face {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 16px;
-        }
-
-        .card-front {
-            transform: rotateY(180deg);
-            background: #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2), 0 0 0 1px rgba(212, 175, 55, 0.3);
-        }
-
-        .card-back {
-            background: linear-gradient(145deg, #1e293b, #020617);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Typography spacing */
-        h1, h2, h3, .heading-serif {
-            font-family: var(--font-serif) !important;
-            line-height: 1.25 !important;
-            letter-spacing: -0.01em;
-        }
-
-        .prose h1, .prose h2, .prose h3, .prose h4 {
-            font-family: var(--font-serif) !important;
-            font-weight: 700 !important;
-            font-style: italic !important;
-            margin-top: 2rem !important;
-        }
-
-        .transition-page {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            *, ::before, ::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-            .sparkle {
-                display: none !important;
-            }
+            perspective: 1200px;
         }
     </style>
 </head>
-<body>
-    <div class="bg-grain"></div>
+<body class="selection:bg-amber-400/30 selection:text-amber-200">
+    <div class="bg-grain" aria-hidden="true"></div>
     <div id="root" class="relative z-10"></div>
-    
-    <!-- Generate some background sparkles -->
-    <script>
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            for (let i = 0; i < 15; i++) {
-                const s = document.createElement('div');
-                s.className = 'sparkle';
-                const size = Math.random() * 3 + 2 + 'px';
-                s.style.width = size;
-                s.style.height = size;
-                s.style.left = Math.random() * 100 + 'vw';
-                s.style.top = '100vh';
-                s.style.animationDelay = Math.random() * 8 + 's';
-                s.style.animationDuration = Math.random() * 10 + 10 + 's';
-                document.body.appendChild(s);
-            }
-        }
-    </script>
-<script type="module" src="/index.tsx"></script>
+    <script type="module" src="/index.tsx"></script>
 </body>
 </html>

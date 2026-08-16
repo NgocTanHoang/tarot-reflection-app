@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { TarotCard, UserPreferences } from '../types';
-import { ALL_TAROT_CARDS, TAROT_78_DECK } from '../data/tarotData';
+import { TAROT_78_DECK } from '../data/tarotData';
 import { TarotCardView } from '../components/TarotCardView';
 import { CardDetailModal } from '../components/CardDetailModal';
 import { 
@@ -11,7 +11,6 @@ import {
   Wind, 
   Mountain, 
   BookOpen, 
-  Filter,
   X
 } from 'lucide-react';
 
@@ -64,17 +63,17 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
   }, [selectedCategory, searchQuery]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-6 sm:py-10 px-4 space-y-8">
+    <div className="w-full max-w-7xl mx-auto py-8 sm:py-12 px-4 sm:px-6 space-y-8">
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-3">
+      <div className="text-center max-w-2xl mx-auto space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-semibold">
           <BookOpen className="w-3.5 h-3.5" />
-          {isVi ? 'Bách Khoa Biểu Tượng Tâm Lý' : 'Symbolic Tarot Encyclopedia'}
+          <span>{isVi ? 'Bách Khoa Biểu Tượng Tâm Lý' : 'Symbolic Tarot Encyclopedia'}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
           {isVi ? 'Thư Viện 78 Lá Bài Tarot' : '78 Card Archetype Library'}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-2">
+        <p className="text-xs sm:text-sm text-slate-400">
           {isVi
             ? 'Khám phá ý nghĩa biểu tượng, câu hỏi tự suy ngẫm và góc nhìn tâm lý của từng lá bài.'
             : 'Explore the archetypal symbolism, psychological depth, and reflection prompts of all 78 cards.'}
@@ -82,7 +81,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
       </div>
 
       {/* Search & Category Filter Controls */}
-      <div className="space-y-4">
+      <div className="space-y-4 max-w-4xl mx-auto">
         {/* Search Bar */}
         <div className="max-w-xl mx-auto relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -115,9 +114,9 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all whitespace-nowrap ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 transition-all whitespace-nowrap ${
                   isSelected
-                    ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-sm'
+                    ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 font-semibold shadow-sm'
                     : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800 hover:bg-slate-850'
                 }`}
               >
@@ -130,7 +129,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
       </div>
 
       {/* Result counter */}
-      <div className="flex items-center justify-between text-xs text-slate-400 px-2">
+      <div className="flex items-center justify-between text-xs text-slate-400 px-2 max-w-7xl mx-auto border-b border-slate-800/80 pb-2">
         <span>
           {isVi
             ? `Hiển thị ${filteredCards.length} lá bài`
@@ -139,7 +138,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
         {searchQuery && (
           <button
             onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
-            className="text-amber-400/80 hover:text-amber-300 underline"
+            className="text-amber-400 hover:underline"
           >
             {isVi ? 'Xóa bộ lọc' : 'Clear filters'}
           </button>
@@ -148,14 +147,14 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
 
       {/* Cards Grid */}
       {filteredCards.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
           {filteredCards.map((card) => (
             <div
               key={card.id}
               onClick={() => setSelectedCard(card)}
-              className="group cursor-pointer flex flex-col items-center p-3 rounded-2xl bg-slate-900/60 hover:bg-slate-900 border border-slate-850 hover:border-amber-400/40 transition-all duration-300 hover:-translate-y-1 shadow-lg"
+              className="group cursor-pointer flex flex-col items-center p-3 rounded-2xl bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-400/40 transition-all duration-300 hover:-translate-y-1 shadow-md"
             >
-              <div className="w-full flex justify-center mb-3">
+              <div className="w-full flex justify-center mb-2.5">
                 <TarotCardView
                   card={card}
                   isReversed={false}

@@ -3,14 +3,10 @@ import { Reading, DailyReading, UserPreferences } from '../types';
 import { 
   TrendingUp, 
   Flame, 
-  Calendar, 
   Layers, 
   Sparkles, 
   Award, 
   Compass, 
-  Smile, 
-  Briefcase, 
-  Heart,
   Droplets,
   Wind,
   Mountain
@@ -85,17 +81,17 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
   const totalSessions = readings.length + dailyReadings.length;
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-6 sm:py-10 px-4 space-y-10">
+    <div className="w-full max-w-5xl mx-auto py-8 sm:py-12 px-4 space-y-10">
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-3">
+      <div className="text-center max-w-2xl mx-auto space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-semibold">
           <TrendingUp className="w-3.5 h-3.5" />
-          {isVi ? 'Tiến Trình • Thấu Hiểu Bản Thân' : 'Self-Discovery Insights'}
+          <span>{isVi ? 'Tiến Trình • Thấu Hiểu Bản Thân' : 'Self-Discovery Insights'}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
           {isVi ? 'Nhật Trình Phản Tỉnh Cá Nhân' : 'Your Reflection Landscape'}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-2">
+        <p className="text-xs sm:text-sm text-slate-400">
           {isVi
             ? 'Quan sát các chủ đề và nguyên mẫu bạn thường kết nối nhất trong hành trình tự chiêm nghiệm.'
             : 'Observe the life themes and archetypal energies you connect with most often.'}
@@ -104,9 +100,9 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
 
       {/* Top 3 Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-        <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex items-center gap-4">
+        <div className="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center">
-            <Layers className="w-6 h-6 text-amber-400" />
+            <Layers className="w-5 h-5 text-amber-400" />
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
@@ -118,9 +114,9 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
           </div>
         </div>
 
-        <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex items-center gap-4">
+        <div className="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-rose-400/10 border border-rose-400/30 flex items-center justify-center">
-            <Flame className="w-6 h-6 text-rose-400" />
+            <Flame className="w-5 h-5 text-rose-400" />
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
@@ -132,9 +128,9 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
           </div>
         </div>
 
-        <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex items-center gap-4">
+        <div className="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-emerald-400/10 border border-emerald-400/30 flex items-center justify-center">
-            <Award className="w-6 h-6 text-emerald-400" />
+            <Award className="w-5 h-5 text-emerald-400" />
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
@@ -148,10 +144,10 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
       </div>
 
       {/* Theme Distribution */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-6">
-        <h3 className="font-serif font-bold text-lg text-amber-100 flex items-center gap-2">
-          <Compass className="w-5 h-5 text-amber-400" />
-          {isVi ? 'Phân Bổ Lĩnh Vực Soi Rọi' : 'Reflective Themes Breakdown'}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-6">
+        <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100 flex items-center gap-2">
+          <Compass className="w-4 h-4 text-amber-400" />
+          <span>{isVi ? 'Phân Bổ Lĩnh Vực Soi Rọi' : 'Reflective Themes Breakdown'}</span>
         </h3>
 
         <div className="space-y-4">
@@ -166,7 +162,7 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
                 <div className="w-full h-2 rounded-full bg-slate-950 overflow-hidden border border-slate-800">
                   <div
                     style={{ width: `${percentage}%` }}
-                    className="h-full bg-gradient-to-r from-amber-400 to-amber-600 rounded-full transition-all duration-500"
+                    className="h-full bg-amber-400 rounded-full transition-all duration-500"
                   ></div>
                 </div>
               </div>
@@ -176,10 +172,10 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
       </div>
 
       {/* Element & Archetype Resonance */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-6">
-        <h3 className="font-serif font-bold text-lg text-amber-100 flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-amber-400" />
-          {isVi ? 'Nguyên Tố & Năng Lượng Biểu Tượng' : 'Archetypal Elements Encountered'}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-6">
+        <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100 flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-amber-400" />
+          <span>{isVi ? 'Nguyên Tố & Năng Lượng Biểu Tượng' : 'Archetypal Elements Encountered'}</span>
         </h3>
 
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">

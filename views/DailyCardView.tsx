@@ -12,7 +12,6 @@ import {
   Lightbulb, 
   ShieldCheck, 
   Save, 
-  Share2, 
   Sun,
   Clock
 } from 'lucide-react';
@@ -77,13 +76,13 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-6 sm:py-10 px-4 space-y-10">
+    <div className="w-full max-w-4xl mx-auto py-8 sm:py-12 px-4 space-y-10">
       {/* Header & Streak */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-semibold mb-2">
             <Sun className="w-3.5 h-3.5" />
-            {isVi ? 'Khoảnh Khắc Tĩnh Lặng Mỗi Ngày' : 'Daily Mindfulness Anchor'}
+            <span>{isVi ? 'Khoảnh Khắc Tĩnh Lặng Mỗi Ngày' : 'Daily Mindfulness Anchor'}</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-serif font-bold text-amber-100">
             {isVi ? 'Lá Bài Của Ngày' : 'Card of the Day'}
@@ -96,15 +95,15 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
         </div>
 
         {/* Streak Badge */}
-        <div className="p-4 rounded-2xl bg-slate-900 border border-amber-400/30 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center">
-            <Flame className="w-5 h-5 text-amber-400" />
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-900 border border-amber-400/20 flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center">
+            <Flame className="w-4 h-4 text-amber-400" />
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
               {isVi ? 'Chuỗi Phản Tỉnh' : 'Reflection Streak'}
             </span>
-            <span className="text-lg font-serif font-bold text-amber-200">
+            <span className="text-base sm:text-lg font-serif font-bold text-amber-200">
               {streakCount} {isVi ? 'ngày' : 'days'}
             </span>
           </div>
@@ -113,13 +112,13 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
 
       {/* Main Card Drawing Area */}
       {!todaysDailyCard ? (
-        <div className="p-10 sm:p-16 rounded-3xl bg-slate-900/60 border border-amber-500/20 text-center space-y-6 flex flex-col items-center">
-          <div className="w-20 h-20 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center animate-pulse">
-            <Sparkles className="w-8 h-8 text-amber-300" />
+        <div className="p-10 sm:p-14 rounded-3xl bg-slate-900/80 border border-amber-500/20 text-center space-y-6 flex flex-col items-center">
+          <div className="w-16 h-16 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center">
+            <Sparkles className="w-7 h-7 text-amber-300" />
           </div>
 
-          <div className="max-w-md">
-            <h3 className="font-serif font-bold text-xl text-amber-100 mb-2">
+          <div className="max-w-md space-y-2">
+            <h3 className="font-serif font-bold text-xl text-amber-100">
               {isVi ? 'Sẵn Sàng Cho Nhịp Thở Hôm Nay?' : 'Ready to Anchor Your Day?'}
             </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
@@ -131,15 +130,15 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
 
           <button
             onClick={handleDrawDailyCard}
-            className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-xl shadow-amber-500/20 flex items-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            className="px-8 py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-lg shadow-amber-500/15 flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
           >
             <Sparkles className="w-4 h-4" />
-            {isVi ? 'Rút Lá Bài Của Ngày' : 'Draw Card of the Day'}
+            <span>{isVi ? 'Rút Lá Bài Của Ngày' : 'Draw Card of the Day'}</span>
           </button>
         </div>
       ) : (
         /* Card Drawn Today */
-        <div className="space-y-8 animate-in fade-in duration-300">
+        <div className="space-y-8">
           {/* Anti-compulsion Mindful Banner */}
           <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-200/90 text-xs flex items-center justify-between gap-4">
             <div className="flex items-center gap-2">
@@ -155,29 +154,29 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
             </span>
           </div>
 
-          <div className="p-6 sm:p-10 rounded-3xl bg-slate-900 border border-amber-400/30 shadow-2xl flex flex-col md:flex-row items-center gap-8">
+          <div className="p-6 sm:p-9 rounded-3xl bg-slate-900/90 border border-amber-400/25 shadow-xl flex flex-col md:flex-row items-center gap-8">
             {/* Card Visual */}
             <div className="flex flex-col items-center flex-shrink-0">
               <TarotCardView
                 card={todaysDailyCard.card}
                 isReversed={todaysDailyCard.isReversed}
                 isFlipped={isFlipped}
-                size="lg"
+                size="md"
                 language={preferences.language}
               />
               <button
                 onClick={() => setInspectingCard(todaysDailyCard.card)}
-                className="mt-4 text-xs font-semibold text-amber-400/90 hover:text-amber-300 flex items-center gap-1.5 transition-colors"
+                className="mt-3 text-xs font-semibold text-amber-400/90 hover:text-amber-300 flex items-center gap-1.5 transition-colors"
               >
                 <BookOpen className="w-3.5 h-3.5" />
-                <span>{isVi ? 'Xem chi tiết biểu tượng' : 'Explore Card Symbolism'}</span>
+                <span>{isVi ? 'Xem chi tiết biểu tượng' : 'Explore Symbolism'}</span>
               </button>
             </div>
 
             {/* Daily Prompt & Guidance */}
-            <div className="flex-grow space-y-6 text-slate-300 w-full">
+            <div className="flex-grow space-y-5 text-slate-300 w-full">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">
                   {todaysDailyCard.card.arcana} Arcana {todaysDailyCard.card.suit ? `• ${todaysDailyCard.card.suit}` : ''}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100 mt-1">
@@ -191,10 +190,10 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
               </div>
 
               {/* Reflection Prompt */}
-              <div className="p-4 rounded-2xl bg-slate-950/80 border border-amber-400/20">
-                <h4 className="text-[11px] font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5 mb-1.5">
+              <div className="p-4 rounded-2xl bg-slate-950/70 border border-amber-400/20 space-y-1">
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
-                  {isVi ? 'Câu Hỏi Tự Vấn Ngày Hôm Nay' : 'Today’s Journaling Prompt'}
+                  <span>{isVi ? 'Câu Hỏi Tự Vấn Ngày Hôm Nay' : 'Today’s Journaling Prompt'}</span>
                 </h4>
                 <p className="font-serif italic text-amber-100 text-sm leading-relaxed">
                   "{todaysDailyCard.prompt}"
@@ -202,10 +201,10 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
               </div>
 
               {/* Micro-Action Seed */}
-              <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
-                <h4 className="text-[11px] font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5 mb-1.5">
+              <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
                   <Lightbulb className="w-3.5 h-3.5" />
-                  {isVi ? 'Hành Động Nhỏ Gợi Ý' : 'Suggested Daily Micro-Action'}
+                  <span>{isVi ? 'Hành Động Nhỏ Gợi Ý' : 'Suggested Daily Micro-Action'}</span>
                 </h4>
                 <p className="text-emerald-100 text-xs leading-relaxed">
                   {isVi
@@ -216,7 +215,7 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
 
               {/* Autonomy Note */}
               <div className="text-[11px] text-slate-500 italic flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-slate-500" />
+                <ShieldCheck className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
                 <span>
                   {isVi
                     ? 'Lá bài là điểm tựa để bạn quan sát bản thân, không phải phán quyết tương lai.'
@@ -227,10 +226,10 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
           </div>
 
           {/* Daily Journal Note Input */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
-            <h3 className="font-serif font-bold text-lg text-amber-100 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-amber-400" />
-              {isVi ? 'Ghi Chép Suy Ngẫm Hôm Nay' : 'Today’s Mindful Reflection'}
+          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-4">
+            <h3 className="font-serif font-bold text-base sm:text-lg text-amber-100 flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-amber-400" />
+              <span>{isVi ? 'Ghi Chép Suy Ngẫm Hôm Nay' : 'Today’s Mindful Reflection'}</span>
             </h3>
 
             <textarea
@@ -250,14 +249,14 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
                 {savedSuccess && (
                   <span className="text-emerald-400 font-semibold flex items-center gap-1">
                     <Check className="w-4 h-4" />
-                    {isVi ? 'Đã lưu ghi chép ngày!' : 'Daily reflection saved!'}
+                    <span>{isVi ? 'Đã lưu ghi chép ngày!' : 'Daily reflection saved!'}</span>
                   </span>
                 )}
               </span>
 
               <button
                 onClick={handleSaveNotes}
-                className="px-6 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold flex items-center gap-2 transition-colors"
+                className="px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold flex items-center gap-2 transition-colors shadow-sm"
               >
                 <Save className="w-4 h-4" />
                 <span>{isVi ? 'Lưu Ghi Chép' : 'Save Reflection'}</span>
