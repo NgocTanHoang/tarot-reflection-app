@@ -1,54 +1,135 @@
-
 export type Arcana = "Major" | "Minor";
 export type Suit = "Wands" | "Cups" | "Swords" | "Pentacles" | null;
-export type Rank = number | "Page" | "Knight" | "Queen" | "King" | null;
+export type Rank = number | "Ace" | "Page" | "Knight" | "Queen" | "King";
 
-export interface SymbolInfo {
+export type ReadingTopic = 
+  | "Love & Relationships" 
+  | "Work & Study" 
+  | "Personal Growth" 
+  | "Current Emotions" 
+  | "A Decision I'm Considering" 
+  | "General Reflection";
+
+export type ReadingTopicVi =
+  | "Tình cảm & Mối quan hệ"
+  | "Công việc & Học tập"
+  | "Phát triển bản thân"
+  | "Cảm xúc hiện tại"
+  | "Cân nhắc quyết định"
+  | "Suy ngẫm tổng quan";
+
+export type SpreadType = "1-card" | "3-card" | "5-card" | "decision-path";
+
+export interface SpreadPosition {
+  index: number;
+  label: string;
+  labelVi: string;
+  description: string;
+  descriptionVi: string;
+}
+
+export interface SymbolDetail {
   name: string;
-  meaning_psychological: string;
-  visual_note: string;
+  nameVi: string;
+  meaning: string;
+  meaningVi: string;
 }
 
-export interface EnergyProfile {
-  pace: "chậm" | "trung bình" | "nhanh";
-  orientation: "hướng nội" | "hướng ngoại";
-  tone: "mềm" | "trung tính" | "mạnh";
-}
-
-export interface ContextBias {
-  love_focus: string;
-  work_focus: string;
-  self_focus: string;
-  emotional_focus: string;
+export interface ContextualReflection {
+  love: string;
+  work: string;
+  growth: string;
+  emotion: string;
+  decision: string;
+  general: string;
 }
 
 export interface TarotCard {
-  id: number;
+  id: string; // e.g. "major-00", "wands-01"
+  number: number;
   name: string;
+  nameVi: string;
   arcana: Arcana;
   suit: Suit;
   rank: Rank;
   imageUrl: string;
-  core_theme: string[];
-  symbols: SymbolInfo[];
-  psychological_dimensions: string[];
-  energy_profile: EnergyProfile;
-  context_bias: ContextBias;
-  action_seeds: string[];
-  reflection_prompts: string[];
+  keywords: string[];
+  keywordsVi: string[];
+  symbolism: string;
+  symbolismVi: string;
+  symbols: SymbolDetail[];
+  psychologicalThemes: string[];
+  psychologicalThemesVi: string[];
+  uprightMeaning: string;
+  uprightMeaningVi: string;
+  reversedMeaning: string;
+  reversedMeaningVi: string;
+  reflectionPrompts: string[];
+  reflectionPromptsVi: string[];
+  positiveActions: string[];
+  positiveActionsVi: string[];
+  contextualInsights: {
+    en: ContextualReflection;
+    vi: ContextualReflection;
+  };
+  cautionContext: string;
+  cautionContextVi: string;
 }
 
-export type ReadingTopic = "Tình cảm" | "Công việc" | "Phát triển bản thân" | "Tâm trạng";
+export interface DrawnCard {
+  cardId: string;
+  isReversed: boolean;
+  positionIndex: number;
+  positionLabel: string;
+  positionLabelVi: string;
+  customReflection?: {
+    symbolicMeaning: string;
+    reflection: string;
+    positiveGuidance: string;
+    reflectionPrompt: string;
+    closing: string;
+  };
+}
 
 export interface Reading {
   id: string;
-  date: number;
-  topic: ReadingTopic;
-  cardId: number;
-  interpretation: string;
+  createdAt: number;
+  theme: ReadingTopic;
+  themeVi: ReadingTopicVi;
+  spreadType: SpreadType;
+  spreadTitle: string;
+  userQuestion?: string;
+  cards: DrawnCard[];
+  journalNote?: string;
+  userTags?: string[];
+  isFavorite?: boolean;
 }
 
-export interface UserState {
-  name: string;
-  history: Reading[];
+export interface DailyCardEntry {
+  dateStr: string; // YYYY-MM-DD
+  timestamp: number;
+  cardId: string;
+  isReversed: boolean;
+  reflectionPrompt: string;
+  reflectionPromptVi: string;
+  positiveAction: string;
+  positiveActionVi: string;
+  journalNote?: string;
+}
+
+export interface UserPreferences {
+  language: "vi" | "en";
+  allowReversed: boolean;
+  enableSound: boolean;
+  reduceMotion: boolean;
+  cardBackStyle: "celestial" | "minimal-gold" | "deep-cosmos";
+}
+
+export interface UserStats {
+  totalReadings: number;
+  totalDailyCards: number;
+  streakDays: number;
+  lastActiveDate: string;
+  themeCounts: Record<string, number>;
+  drawnCardCounts: Record<string, number>;
 }

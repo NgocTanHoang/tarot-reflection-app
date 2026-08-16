@@ -1,5 +1,8 @@
 {
-  "name": "Tarot Tâm Lý - Người Kể Chuyện Biểu Tượng",
-  "description": "Một ứng dụng phản chiếu tâm lý qua hệ biểu tượng Tarot, giúp bạn tìm thấy góc nhìn tích cực và nhẹ nhàng cho cuộc sống hàng ngày.",
-  "requestFramePermissions": []
+  "name": "Tarot Reflection App",
+  "description": "A symbolic mirror for self-reflection, emotional exploration, mindfulness, and personal autonomy through the 78 Tarot archetypes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
