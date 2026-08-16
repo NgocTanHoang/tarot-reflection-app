@@ -12,7 +12,9 @@ import {
   X, 
   ShieldCheck, 
   TrendingUp,
-  Globe
+  Globe,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { UserPreferences } from '../types';
 
@@ -42,6 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isVi = preferences.language === 'vi';
+  const isDark = preferences.theme !== 'light';
 
   const navItems: Array<{ id: ActiveView; labelVi: string; labelEn: string; icon: React.ReactNode }> = [
     { id: 'home', labelVi: 'Trang chủ', labelEn: 'Home', icon: <Compass className="w-4 h-4" /> },
@@ -62,6 +65,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const toggleLanguage = () => {
     onUpdatePreferences({ language: isVi ? 'en' : 'vi' });
+  };
+
+  const toggleTheme = () => {
+    onUpdatePreferences({ theme: isDark ? 'light' : 'dark' });
   };
 
   return (
@@ -107,8 +114,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Actions: Language & Mobile Menu Toggle */}
+          {/* Actions: Theme Toggle, Language & Mobile Menu Toggle */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Quick theme toggle */}
+            <button
+              onClick={toggleTheme}
+              title={isDark ? (isVi ? 'Chuyển sang giao diện Sáng' : 'Switch to Light Theme') : (isVi ? 'Chuyển sang giao diện Tối' : 'Switch to Dark Theme')}
+              className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-400/30 text-xs text-slate-300 flex items-center justify-center transition-colors"
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <Sun className="w-4 h-4 text-amber-300" />
+              ) : (
+                <Moon className="w-4 h-4 text-indigo-400" />
+              )}
+            </button>
+
             {/* Quick language toggle */}
             <button
               onClick={toggleLanguage}

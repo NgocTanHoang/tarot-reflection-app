@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { 
   ReadingTopic, 
-  SpreadConfig, 
   TarotCard, 
   DrawnCard, 
   Reading, 
@@ -48,7 +47,7 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
   const [step, setStep] = useState<Step>('topic');
   const [selectedTopic, setSelectedTopic] = useState<ReadingTopic>('Personal Growth');
   const [userQuestion, setUserQuestion] = useState('');
-  const [selectedSpread, setSelectedSpread] = useState<SpreadConfig>(SPREADS[1]); // default 3-card spread
+  const [selectedSpread, setSelectedSpread] = useState(SPREADS[1]); // default 3-card spread
   const [drawnCards, setDrawnCards] = useState<DrawnCard[]>([]);
   const [activeFlippedIndices, setActiveFlippedIndices] = useState<number[]>([]);
   const [inspectingCard, setInspectingCard] = useState<TarotCard | null>(null);
@@ -133,9 +132,9 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
     const drawn: DrawnCard[] = pickedCards.map((item, idx) => ({
       card: item.card,
       isReversed: item.isReversed,
-      position: spreadPositions[idx] ? spreadPositions[idx].id : idx + 1,
+      position: spreadPositions[idx] ? spreadPositions[idx].index + 1 : idx + 1,
       positionLabel: spreadPositions[idx]
-        ? (isVi ? spreadPositions[idx].nameVi : spreadPositions[idx].name)
+        ? (isVi ? spreadPositions[idx].labelVi : spreadPositions[idx].label)
         : `Position ${idx + 1}`
     }));
 
@@ -178,17 +177,18 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
   };
 
   const handleSaveToJournal = () => {
+    const spreadName = isVi ? selectedSpread.titleVi : selectedSpread.title;
     const newReading: Reading = {
       id: `reading-${Date.now()}`,
       date: new Date().toISOString(),
       topic: selectedTopic,
       question: userQuestion || (isVi ? 'Suy ngẫm tự do' : 'Open reflection'),
-      spreadType: selectedSpread.name,
+      spreadType: spreadName,
       cards: drawnCards,
       interpretation: Object.values(structuredInterpretations).map(i => i.reflection).join('\n\n'),
       personalNotes: userNotes,
       userReflections: userActionPlan,
-      tags: [selectedTopic, selectedSpread.name],
+      tags: [selectedTopic, spreadName],
       isFavorite: false
     };
 
@@ -325,38 +325,45 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 mt-2">
               {isVi
-                ? 'Mỗi kiểu trải bài mang đến một cấu trúc soi rọi với các vị trí ý nghĩa khác nhau.'
-                : 'Each spread provides a structured frame of reference for your reflection.'}
+                ? 'Hãy chọn 1 kiểu trải bài phù hợp nhất với mong muốn phản chiếu của bạn lúc này.'
+                : 'Choose a spread structure that best matches the scope of your reflection.'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {SPREADS.map((sp) => {
-              const isSelected = selectedSpread.id === sp.id;
+              const isSelected = selectedSpread.id === sp.id || selectedSpread.type === sp.type;
               return (
                 <div
-                  key={sp.id}
+                  key={sp.id || sp.type}
                   onClick={() => setSelectedSpread(sp)}
-                  className={`p-6 rounded-3xl cursor-pointer border transition-all duration-200 flex flex-col justify-between ${
+                  className={`p-6 rounded-3xl cursor-pointer border transition-all duration-200 flex flex-col justify-between relative ${
                     isSelected
-                      ? 'bg-amber-400/10 border-amber-400 ring-2 ring-amber-400/20 shadow-xl'
-                      : 'bg-slate-900/80 hover:bg-slate-900 border-slate-800 hover:border-slate-700'
+                      ? 'bg-amber-400/10 border-amber-400 ring-2 ring-amber-400/30 shadow-2xl scale-[1.02]'
+                      : 'bg-slate-900/80 hover:bg-slate-900 border-slate-800 hover:border-slate-700 opacity-80 hover:opacity-100'
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-amber-300 text-xs font-bold font-serif">
-                        {sp.cardCount} {isVi ? 'Lá Bài' : 'Cards'}
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold font-serif ${
+                        isSelected ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-slate-950 border border-slate-800 text-amber-300'
+                      }`}>
+                        {sp.cardCount || sp.positions.length} {isVi ? 'Lá Bài' : 'Cards'}
                       </span>
-                      {isSelected && (
-                        <div className="w-6 h-6 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center">
-                          <Check className="w-4 h-4 stroke-[3]" />
-                        </div>
+                      {isSelected ? (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-400 bg-amber-400/20 px-2.5 py-1 rounded-full border border-amber-400/40">
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          {isVi ? 'Đang chọn' : 'Selected'}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] text-slate-500 hover:text-slate-400">
+                          {isVi ? 'Nhấn để chọn' : 'Click to select'}
+                        </span>
                       )}
                     </div>
 
                     <h3 className="font-serif font-bold text-lg text-amber-100 mb-2">
-                      {isVi ? sp.nameVi : sp.name}
+                      {isVi ? sp.titleVi : sp.title}
                     </h3>
                     <p className="text-xs text-slate-400 mb-6 leading-relaxed">
                       {isVi ? sp.descriptionVi : sp.description}
@@ -367,10 +374,10 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                         {isVi ? 'Các vị trí soi rọi:' : 'Positions:'}
                       </h4>
                       {sp.positions.map((pos) => (
-                        <div key={pos.id} className="text-xs text-slate-300 flex items-start gap-2">
-                          <span className="font-serif text-amber-300/80 font-bold">{pos.id}.</span>
+                        <div key={pos.index} className="text-xs text-slate-300 flex items-start gap-2">
+                          <span className="font-serif text-amber-300/80 font-bold">{pos.index + 1}.</span>
                           <div>
-                            <span className="font-medium text-slate-200">{isVi ? pos.nameVi : pos.name}</span>
+                            <span className="font-medium text-slate-200">{isVi ? pos.labelVi : pos.label}</span>
                             <span className="text-[11px] text-slate-500 block">{isVi ? pos.descriptionVi : pos.description}</span>
                           </div>
                         </div>
@@ -393,7 +400,7 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
               onClick={() => setStep('draw')}
               className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg transition-all active:scale-95"
             >
-              <span>{isVi ? 'Bắt đầu Rút Bài' : 'Proceed to Card Draw'}</span>
+              <span>{isVi ? `Bắt đầu Rút ${selectedSpread.cardCount || selectedSpread.positions.length} Lá` : `Draw ${selectedSpread.cardCount || selectedSpread.positions.length} Cards`}</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
@@ -408,12 +415,16 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
               {isVi ? 'Rút Bài Tâm Thức' : 'Mindful Draw'}
             </h2>
             <p className="text-xs text-slate-400 mt-1">
-              {isVi ? `Đang trải kiểu: ${selectedSpread.nameVi} (${selectedSpread.cardCount} lá bài)` : `Spread: ${selectedSpread.name}`}
+              {isVi 
+                ? `Kiểu trải: ${selectedSpread.titleVi} (${selectedSpread.cardCount || selectedSpread.positions.length} lá bài)` 
+                : `Spread: ${selectedSpread.title} (${selectedSpread.cardCount || selectedSpread.positions.length} cards)`}
             </p>
           </div>
 
           <DeckShuffleSpread
-            requiredCount={selectedSpread.cardCount}
+            requiredCount={selectedSpread.cardCount || selectedSpread.positions.length}
+            spreadTitle={selectedSpread.title}
+            spreadTitleVi={selectedSpread.titleVi}
             onCardsSelected={handleCardsDrawn}
             allowReversed={preferences.allowReversed}
             language={preferences.language}
@@ -439,10 +450,12 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 py-4">
             {drawnCards.map((item, idx) => {
               const isFlipped = activeFlippedIndices.includes(idx);
+              const cleanLabel = item.positionLabel.replace(/^\d+\.\s*/, '');
+
               return (
-                <div key={idx} className="flex flex-col items-center space-y-3">
-                  <span className="px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[11px] font-serif font-bold text-amber-300 text-center max-w-[200px] truncate">
-                    {item.position}. {item.positionLabel}
+                <div key={`reveal-${item.card.id}-${item.position}`} className="flex flex-col items-center space-y-3">
+                  <span className="px-3.5 py-1.5 rounded-full bg-slate-900 border border-amber-400/30 text-xs font-serif font-bold text-amber-300 text-center max-w-[220px] truncate shadow-md">
+                    {item.position}. {cleanLabel}
                   </span>
 
                   <TarotCardView
@@ -457,10 +470,10 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                   {isFlipped && (
                     <button
                       onClick={() => setInspectingCard(item.card)}
-                      className="text-[11px] text-amber-400/80 hover:text-amber-300 flex items-center gap-1 transition-colors"
+                      className="text-xs text-amber-400/90 hover:text-amber-300 flex items-center gap-1.5 transition-colors font-medium"
                     >
-                      <BookOpen className="w-3 h-3" />
-                      <span>{isVi ? 'Chi tiết lá bài' : 'Inspect Details'}</span>
+                      <BookOpen className="w-3.5 h-3.5" />
+                      <span>{isVi ? 'Chi tiết biểu tượng' : 'Inspect Details'}</span>
                     </button>
                   )}
                 </div>
@@ -485,7 +498,7 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
               className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg transition-all active:scale-95 disabled:opacity-50"
             >
               <span>{isVi ? 'Xem Phản Chiếu 4 Lớp & Nhật Ký' : 'View 4-Layer Reflection & Journal'}</span>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4 stroke-[3]" />
             </button>
           </div>
         </div>
@@ -501,7 +514,7 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                 {isVi ? 'Trải bài Phản Tỉnh' : 'Reflective Spread'}
               </span>
               <h2 className="text-xl sm:text-2xl font-serif font-bold text-amber-100">
-                {selectedTopic} • {isVi ? selectedSpread.nameVi : selectedSpread.name}
+                {selectedTopic} • {isVi ? selectedSpread.titleVi : selectedSpread.title}
               </h2>
               {userQuestion && (
                 <p className="text-xs text-slate-400 mt-1 italic">
@@ -519,19 +532,20 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
             </button>
           </div>
 
-          {/* Cards Breakdown with 4 Layers */}
-          <div className="space-y-8">
+          {/* Cards Breakdown with 4 Layers - Clean layout without excess border nesting */}
+          <div className="space-y-10">
             {drawnCards.map((item, idx) => {
               const interpKey = `${item.card.id}-${item.position}`;
               const interp = structuredInterpretations[interpKey];
+              const cleanPositionLabel = item.positionLabel.replace(/^\d+\.\s*/, '');
 
               return (
                 <div
-                  key={idx}
-                  className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl flex flex-col lg:flex-row gap-6 sm:gap-8 items-start"
+                  key={`interpret-${item.card.id}-${item.position}`}
+                  className="py-6 border-b border-slate-800/80 last:border-0 flex flex-col md:flex-row gap-6 sm:gap-8 items-start"
                 >
-                  {/* Card Visual Thumbnail & Details Trigger */}
-                  <div className="w-full lg:w-48 flex-shrink-0 flex flex-col items-center">
+                  {/* Card Visual - Spacious, direct card without redundant outer container */}
+                  <div className="flex-shrink-0 flex flex-col items-center mx-auto md:mx-0">
                     <TarotCardView
                       card={item.card}
                       isReversed={item.isReversed}
@@ -539,13 +553,13 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                       size="sm"
                       language={preferences.language}
                     />
-                    <div className="text-center mt-3">
-                      <span className="text-[11px] font-serif font-bold text-amber-300 block">
-                        {item.position}. {item.positionLabel}
+                    <div className="text-center mt-2.5 max-w-[160px]">
+                      <span className="text-xs font-serif font-bold text-amber-300 block">
+                        {item.position}. {cleanPositionLabel}
                       </span>
                       <button
                         onClick={() => setInspectingCard(item.card)}
-                        className="mt-1 text-[10px] text-slate-400 hover:text-amber-300 underline"
+                        className="mt-1 text-[11px] text-slate-400 hover:text-amber-300 underline font-medium"
                       >
                         {isVi ? 'Xem biểu tượng gốc' : 'View Full Symbols'}
                       </button>
@@ -553,25 +567,25 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                   </div>
 
                   {/* 4 Layers Breakdown */}
-                  <div className="flex-grow space-y-4 text-xs sm:text-sm">
+                  <div className="flex-grow space-y-4 text-xs sm:text-sm w-full">
                     {/* Layer 1: Symbolic Meaning */}
-                    <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400/90 flex items-center gap-1.5 mb-1.5">
-                        <Sparkles className="w-3.5 h-3.5" />
+                    <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                         {isVi ? 'Lớp 1: Ý Nghĩa Biểu Tượng & Nguyên Mẫu' : 'Layer 1: Symbolic Meaning & Archetype'}
                       </h4>
-                      <p className="text-slate-300 leading-relaxed">
+                      <p className="text-slate-300 leading-relaxed font-sans">
                         {interp ? interp.symbolicMeaning : (isVi ? 'Đang phân tích biểu tượng...' : 'Analyzing symbolism...')}
                       </p>
                     </div>
 
                     {/* Layer 2: Psychological Reflection */}
-                    <div className="p-4 rounded-2xl bg-slate-950/60 border border-indigo-500/20">
+                    <div className="p-4 rounded-2xl bg-indigo-950/20 border border-indigo-500/20">
                       <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5 mb-1.5">
-                        <Compass className="w-3.5 h-3.5" />
+                        <Compass className="w-3.5 h-3.5 text-indigo-400" />
                         {isVi ? 'Lớp 2: Góc Nhìn Phản Chiếu Tâm Lý' : 'Layer 2: Psychological Reflection'}
                       </h4>
-                      <p className="text-slate-200 leading-relaxed">
+                      <p className="text-slate-200 leading-relaxed font-sans">
                         {interp ? interp.reflection : (isVi ? 'Đang kiến tạo góc nhìn soi rọi...' : 'Generating introspective reflection...')}
                       </p>
                     </div>
@@ -580,20 +594,20 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
                         <h4 className="text-[11px] font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5 mb-1.5">
-                          <Lightbulb className="w-3.5 h-3.5" />
+                          <Lightbulb className="w-3.5 h-3.5 text-emerald-400" />
                           {isVi ? 'Lớp 3: Hành Động Nhỏ Hôm Nay' : 'Layer 3: Constructive Micro-Action'}
                         </h4>
-                        <p className="text-emerald-100 text-xs leading-relaxed">
+                        <p className="text-emerald-100 text-xs leading-relaxed font-sans">
                           {interp ? interp.positiveGuidance : '...'}
                         </p>
                       </div>
 
                       <div className="p-4 rounded-2xl bg-amber-950/20 border border-amber-500/20">
                         <h4 className="text-[11px] font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5 mb-1.5">
-                          <HelpCircle className="w-3.5 h-3.5" />
+                          <HelpCircle className="w-3.5 h-3.5 text-amber-400" />
                           {isVi ? 'Câu Hỏi Tự Vấn (Prompt)' : 'Reflection Question'}
                         </h4>
-                        <p className="text-amber-100 text-xs italic leading-relaxed">
+                        <p className="text-amber-100 text-xs italic leading-relaxed font-serif">
                           "{interp ? interp.reflectionPrompt : '...'}"
                         </p>
                       </div>
@@ -601,7 +615,7 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
 
                     {/* Layer 4: Autonomy Stamp */}
                     <div className="text-[11px] text-slate-500 italic pt-1 flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-slate-500" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
                       <span>{interp ? interp.closing : ''}</span>
                     </div>
                   </div>

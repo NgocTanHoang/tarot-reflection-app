@@ -1480,12 +1480,14 @@ SUITS.forEach(s => {
 // Full 78-card verified deck
 export const TAROT_78_DECK: TarotCard[] = [...ALL_TAROT_CARDS, ...MINOR_ARCANA_CARDS];
 
-export const SPREADS = [
+export const SPREADS: SpreadConfig[] = [
   {
-    type: "1-card" as const,
+    id: "single-card",
+    type: "1-card",
     title: "Quick Reflection",
     titleVi: "Rút 1 Lá — Suy Ngẫm Nhanh",
-    description: "A single card for immediate focus and mindful presence.",
+    cardCount: 1,
+    description: "A single card for immediate focus, mindful presence, and observing what is present.",
     descriptionVi: "Một lá bài duy nhất để soi rọi góc nhìn và sự chú tâm ngay lúc này.",
     positions: [
       {
@@ -1498,9 +1500,11 @@ export const SPREADS = [
     ]
   },
   {
-    type: "3-card" as const,
+    id: "three-cards",
+    type: "3-card",
     title: "Perspective Spread",
     titleVi: "Trải 3 Lá — Đa Chiều Góc Nhìn",
+    cardCount: 3,
     description: "Context, perspective, and constructive action.",
     descriptionVi: "Bối cảnh hiện tại, góc nhìn gợi mở và hành động xây dựng.",
     positions: [
@@ -1528,9 +1532,11 @@ export const SPREADS = [
     ]
   },
   {
-    type: "5-card" as const,
+    id: "five-cards",
+    type: "5-card",
     title: "Reflection Journey",
     titleVi: "Trải 5 Lá — Hành Trình Tự Khám Phá",
+    cardCount: 5,
     description: "Deep exploration of situation, influences, blind spots, control, and next steps.",
     descriptionVi: "Khám phá sâu sắc: Hiện trạng, Yếu tố tác động, Điểm mù, Quyền kiểm soát và Bước đi tiếp theo.",
     positions: [

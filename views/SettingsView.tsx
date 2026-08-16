@@ -9,7 +9,9 @@ import {
   Trash2, 
   Download, 
   Sparkles,
-  HeartHandshake
+  HeartHandshake,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { ETHICS_DISCLAIMER_VI, ETHICS_DISCLAIMER_EN } from '../services/safety';
 
@@ -27,6 +29,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   onOpenSafetyHelpline
 }) => {
   const isVi = preferences.language === 'vi';
+  const isDark = preferences.theme !== 'light';
 
   return (
     <div className="w-full max-w-4xl mx-auto py-6 sm:py-10 px-4 space-y-8">
@@ -49,6 +52,45 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         </h3>
 
         <div className="space-y-4">
+          {/* Theme Selection */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
+            <div className="flex items-center gap-3">
+              {isDark ? <Moon className="w-5 h-5 text-indigo-400" /> : <Sun className="w-5 h-5 text-amber-400" />}
+              <div>
+                <span className="font-medium text-xs sm:text-sm text-slate-200 block">
+                  {isVi ? 'Giao diện (Theme)' : 'Theme Mode'}
+                </span>
+                <span className="text-[11px] text-slate-400">
+                  {isVi ? 'Chế độ Tối (Huyền bí) hoặc Sáng (Trang nhã)' : 'Dark (Mystic) or Light (Clean Warm)'}
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => onUpdatePreferences({ theme: 'dark' })}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  isDark
+                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                }`}
+              >
+                <Moon className="w-3.5 h-3.5" />
+                <span>{isVi ? 'Chế độ Tối' : 'Dark'}</span>
+              </button>
+              <button
+                onClick={() => onUpdatePreferences({ theme: 'light' })}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  !isDark
+                    ? 'bg-amber-400 text-slate-950 shadow-md'
+                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                }`}
+              >
+                <Sun className="w-3.5 h-3.5" />
+                <span>{isVi ? 'Chế độ Sáng' : 'Light'}</span>
+              </button>
+            </div>
+          </div>
+
           {/* Language selection */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
             <div className="flex items-center gap-3">

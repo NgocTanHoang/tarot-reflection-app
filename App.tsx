@@ -107,6 +107,19 @@ export const App: React.FC = () => {
     return Math.max(streak, todaysDailyCard ? 1 : 0);
   }, [dailyReadings, todaysDailyCard]);
 
+  // Set data-theme attribute on document root
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-theme', preferences.theme);
+    if (preferences.theme === 'light') {
+      root.classList.add('light-theme');
+      root.classList.remove('dark-theme');
+    } else {
+      root.classList.add('dark-theme');
+      root.classList.remove('light-theme');
+    }
+  }, [preferences.theme]);
+
   // Handlers
   const handleSaveReading = (newReading: Reading) => {
     setReadings(prev => [newReading, ...prev]);

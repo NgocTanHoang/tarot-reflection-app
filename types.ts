@@ -28,6 +28,17 @@ export interface SpreadPosition {
   descriptionVi: string;
 }
 
+export interface SpreadConfig {
+  id: string;
+  type: SpreadType;
+  title: string;
+  titleVi: string;
+  description: string;
+  descriptionVi: string;
+  cardCount: number;
+  positions: SpreadPosition[];
+}
+
 export interface SymbolDetail {
   name: string;
   nameVi: string;
@@ -77,11 +88,11 @@ export interface TarotCard {
 }
 
 export interface DrawnCard {
-  cardId: string;
+  card: TarotCard;
   isReversed: boolean;
-  positionIndex: number;
+  position: number;
   positionLabel: string;
-  positionLabelVi: string;
+  positionLabelVi?: string;
   customReflection?: {
     symbolicMeaning: string;
     reflection: string;
@@ -93,36 +104,39 @@ export interface DrawnCard {
 
 export interface Reading {
   id: string;
-  createdAt: number;
-  theme: ReadingTopic;
-  themeVi: ReadingTopicVi;
-  spreadType: SpreadType;
-  spreadTitle: string;
-  userQuestion?: string;
+  date: string;
+  createdAt?: number;
+  topic: string;
+  theme?: string;
+  themeVi?: string;
+  question: string;
+  spreadType: string;
   cards: DrawnCard[];
-  journalNote?: string;
-  userTags?: string[];
+  interpretation?: string;
+  personalNotes?: string;
+  userReflections?: string;
+  tags?: string[];
   isFavorite?: boolean;
 }
 
-export interface DailyCardEntry {
-  dateStr: string; // YYYY-MM-DD
-  timestamp: number;
-  cardId: string;
+export interface DailyReading {
+  id: string;
+  date: string;
+  card: TarotCard;
   isReversed: boolean;
-  reflectionPrompt: string;
-  reflectionPromptVi: string;
-  positiveAction: string;
-  positiveActionVi: string;
-  journalNote?: string;
+  prompt: string;
+  notes?: string;
+  actionCompleted?: boolean;
 }
 
 export interface UserPreferences {
   language: "vi" | "en";
   allowReversed: boolean;
   enableSound: boolean;
-  reduceMotion: boolean;
-  cardBackStyle: "celestial" | "minimal-gold" | "deep-cosmos";
+  reduceMotion?: boolean;
+  theme: "dark" | "light";
+  dailyReminder?: boolean;
+  cardBackStyle?: "celestial" | "minimal-gold" | "deep-cosmos";
 }
 
 export interface UserStats {
@@ -133,3 +147,4 @@ export interface UserStats {
   themeCounts: Record<string, number>;
   drawnCardCounts: Record<string, number>;
 }
+
