@@ -154,8 +154,21 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-slate-950/95 border-b border-amber-400/20 px-4 pt-3 pb-6 space-y-1.5 animate-in slide-in-from-top-4 duration-200">
-          <div className="grid grid-cols-2 gap-2 pt-2">
+        <div className="xl:hidden bg-slate-950/95 border-b border-amber-400/20 px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top-4 duration-200">
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <span className="text-slate-300 font-medium">
+              {isVi ? 'Giao diện' : 'Theme'}: {isDark ? (isVi ? 'Tối' : 'Dark') : (isVi ? 'Sáng' : 'Light')}
+            </span>
+            <button
+              onClick={toggleTheme}
+              className="px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold flex items-center gap-1.5"
+            >
+              {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+              <span>{isDark ? (isVi ? 'Chuyển sang Sáng' : 'Light Mode') : (isVi ? 'Chuyển sang Tối' : 'Dark Mode')}</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 pt-1">
             {navItems.map((item) => {
               const isActive = currentView === item.id;
               return (
