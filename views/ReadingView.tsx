@@ -286,7 +286,7 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
 
           {/* Introspective Question / Focus Input */}
           <div className="max-w-xl mx-auto bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
-            <label className="block text-xs font-bold uppercase tracking-wider text-amber-300">
+            <label className="block text-xs font-medium text-amber-300">
               {isVi ? 'Câu hỏi hoặc điều bạn đang suy ngẫm (Tùy chọn)' : 'Your Introspective Question or Focus (Optional)'}
             </label>
             <textarea
@@ -578,9 +578,9 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                   <div className="flex-grow space-y-4 text-xs sm:text-sm w-full">
                     {/* Layer 1: Symbolic Meaning */}
                     <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-1">
-                      <h4 className="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                      <h4 className="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
                         <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                        <span>{isVi ? 'Lớp 1: Ý Nghĩa Biểu Tượng & Nguyên Mẫu' : 'Layer 1: Symbolic Meaning & Archetype'}</span>
+                        <span>{isVi ? 'Lớp 1: Ý nghĩa biểu tượng & nguyên mẫu' : 'Layer 1: Symbolic Meaning & Archetype'}</span>
                       </h4>
                       <p className="text-slate-300 leading-relaxed font-sans">
                         {interp ? interp.symbolicMeaning : (isVi ? 'Đang phân tích biểu tượng...' : 'Analyzing symbolism...')}
@@ -589,9 +589,9 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
 
                     {/* Layer 2: Psychological Reflection */}
                     <div className="p-4 rounded-2xl bg-indigo-950/20 border border-indigo-500/20 space-y-1">
-                      <h4 className="text-[11px] font-bold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
+                      <h4 className="text-xs font-semibold text-indigo-300 flex items-center gap-1.5">
                         <Compass className="w-3.5 h-3.5 text-indigo-400" />
-                        <span>{isVi ? 'Lớp 2: Góc Nhìn Phản Chiếu Tâm Lý' : 'Layer 2: Psychological Reflection'}</span>
+                        <span>{isVi ? 'Lớp 2: Góc nhìn phản chiếu tâm lý' : 'Layer 2: Psychological Reflection'}</span>
                       </h4>
                       <p className="text-slate-200 leading-relaxed font-sans">
                         {interp ? interp.reflection : (isVi ? 'Đang kiến tạo góc nhìn soi rọi...' : 'Generating introspective reflection...')}
@@ -601,9 +601,9 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                     {/* Layer 3: Action Seed & Journal Prompt */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
-                        <h4 className="text-[11px] font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
+                        <h4 className="text-xs font-semibold text-emerald-300 flex items-center gap-1.5">
                           <Lightbulb className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>{isVi ? 'Lớp 3: Hành Động Nhỏ Hôm Nay' : 'Layer 3: Constructive Micro-Action'}</span>
+                          <span>{isVi ? 'Lớp 3: Hành động nhỏ hôm nay' : 'Layer 3: Constructive Micro-Action'}</span>
                         </h4>
                         <p className="text-emerald-100 text-xs leading-relaxed font-sans">
                           {interp ? interp.positiveGuidance : '...'}
@@ -611,9 +611,9 @@ export const ReadingView: React.FC<ReadingViewProps> = ({
                       </div>
 
                       <div className="p-4 rounded-2xl bg-amber-950/20 border border-amber-500/20 space-y-1">
-                        <h4 className="text-[11px] font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                        <h4 className="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
                           <HelpCircle className="w-3.5 h-3.5 text-amber-400" />
-                          <span>{isVi ? 'Câu Hỏi Tự Vấn (Prompt)' : 'Reflection Question'}</span>
+                          <span>{isVi ? 'Câu hỏi tự vấn (Prompt)' : 'Reflection Question'}</span>
                         </h4>
                         <p className="text-amber-100 text-xs italic leading-relaxed font-serif">
                           "{interp ? interp.reflectionPrompt : '...'}"

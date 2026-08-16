@@ -210,12 +210,12 @@ export const TarotCardGraphic: React.FC<TarotCardGraphicProps> = ({
 
       {/* Bottom Name Banner */}
       {showLabel && (
-        <div className="relative z-10 w-full text-center pb-1 pt-1.5 border-t border-amber-400/20 bg-slate-950/90 rounded-b-lg">
-          <h4 className="font-serif font-bold text-[11px] sm:text-xs text-amber-200 tracking-wide truncate px-1">
+        <div className="relative z-10 w-full text-center pb-1.5 pt-1.5 border-t border-amber-400/20 bg-slate-950/90 rounded-b-lg">
+          <h4 className="font-serif font-bold text-xs sm:text-sm text-amber-200 tracking-normal truncate px-1.5">
             {isVi ? card.nameVi : card.name}
           </h4>
           {isReversed && (
-            <span className="inline-block mt-0.5 text-[8px] sm:text-[9px] font-bold text-indigo-300 uppercase tracking-widest px-1.5 py-0.2 rounded bg-indigo-950/80 border border-indigo-500/30">
+            <span className="inline-block mt-0.5 text-[9px] sm:text-[10px] font-medium text-indigo-300 tracking-normal px-2 py-0.5 rounded bg-indigo-950/80 border border-indigo-500/30">
               {isVi ? 'Nội tâm' : 'Reversed'}
             </span>
           )}

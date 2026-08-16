@@ -60,7 +60,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
           </div>
 
           <div className="w-full text-center mt-2">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400/70">
+            <span className="text-xs font-medium text-amber-400/80">
               {card.arcana} Arcana {card.suit ? `• ${card.suit}` : ''}
             </span>
           </div>
@@ -70,7 +70,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
         <div className="w-full md:w-7/12 p-6 sm:p-8 flex flex-col overflow-y-auto max-h-[85vh] md:max-h-[90vh]">
           {/* Header */}
           <div className="mb-6">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100 italic">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100">
               {isVi ? card.nameVi : card.name}
             </h2>
             <div className="flex flex-wrap gap-2 mt-2">
@@ -86,17 +86,17 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex border-b border-slate-800 mb-6 gap-2 sm:gap-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <div className="flex border-b border-slate-800 mb-6 gap-2 sm:gap-4 text-xs font-medium text-slate-400">
             <button
               onClick={() => setActiveTab('symbolism')}
               className={`pb-3 transition-colors border-b-2 flex items-center gap-1.5 ${
                 activeTab === 'symbolism'
-                  ? 'text-amber-300 border-amber-400'
+                  ? 'text-amber-300 border-amber-400 font-semibold'
                   : 'border-transparent hover:text-slate-200'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
-              {isVi ? 'Biểu Tượng' : 'Symbolism'}
+              <span>{isVi ? 'Biểu Tượng' : 'Symbolism'}</span>
             </button>
             <button
               onClick={() => setActiveTab('psychology')}

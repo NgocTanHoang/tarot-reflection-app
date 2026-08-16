@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarot Reflection - Tấm Gương Tự Phản Tỉnh Biểu Tượng</title>
+    <script>
+      tailwind = {
+        config: {
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['"Be Vietnam Pro"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                serif: ['"Literata"', '"Lora"', 'Georgia', 'serif'],
+                body: ['"Be Vietnam Pro"', 'system-ui', '-apple-system', 'sans-serif']
+              }
+            }
+          }
+        }
+      };
+    </script>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500;1,7..72,600;1,7..72,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&subset=vietnamese,latin,latin-ext" rel="stylesheet">
     
     <style>
         :root {
-            --font-body: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            --font-serif: 'Lora', 'Playfair Display', Georgia, serif;
+            --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-serif: 'Literata', 'Lora', Georgia, serif;
             --app-bg: #070a13;
             --app-text: #f8fafc;
             --surface-primary: #0f1424;
@@ -38,11 +53,15 @@
         }
 
         body {
-            font-family: var(--font-body);
+            font-family: var(--font-sans);
             background-color: var(--app-bg);
             color: var(--app-text);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+            line-height: 1.6;
+            letter-spacing: normal;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -50,6 +69,18 @@
         .font-serif {
             font-family: var(--font-serif);
             font-feature-settings: "kern" 1, "liga" 1;
+            letter-spacing: normal;
+        }
+
+        .font-sans {
+            font-family: var(--font-sans);
+            letter-spacing: normal;
+        }
+
+        /* Vietnamese diacritic baseline stabilization */
+        h1, h2, h3, h4, h5, h6 {
+            text-wrap: balance;
+            letter-spacing: normal;
         }
 
         /* Light Theme Overrides */
@@ -60,35 +91,51 @@
         }
 
         [data-theme="light"] .bg-slate-950,
-        .light-theme .bg-slate-950 {
+        [data-theme="light"] .bg-slate-950\/98,
+        [data-theme="light"] .bg-slate-950\/95,
+        [data-theme="light"] .bg-slate-950\/90,
+        .light-theme .bg-slate-950,
+        .light-theme .bg-slate-950\/98,
+        .light-theme .bg-slate-950\/95,
+        .light-theme .bg-slate-950\/90 {
             background-color: #faf7f2 !important;
+        }
+
+        [data-theme="light"] .bg-slate-950\/70,
+        [data-theme="light"] .bg-slate-950\/60,
+        [data-theme="light"] .bg-slate-950\/80,
+        .light-theme .bg-slate-950\/70,
+        .light-theme .bg-slate-950\/60,
+        .light-theme .bg-slate-950\/80 {
+            background-color: #f4eee3 !important;
+            border-color: #eae3d6 !important;
         }
 
         [data-theme="light"] .bg-slate-900,
         .light-theme .bg-slate-900 {
             background-color: #ffffff !important;
             border-color: #eae3d6 !important;
-            box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.04);
         }
 
         [data-theme="light"] .bg-slate-900\/90,
         [data-theme="light"] .bg-slate-900\/80,
+        [data-theme="light"] .bg-slate-900\/70,
         [data-theme="light"] .bg-slate-900\/60,
         .light-theme .bg-slate-900\/90,
         .light-theme .bg-slate-900\/80,
+        .light-theme .bg-slate-900\/70,
         .light-theme .bg-slate-900\/60 {
             background-color: rgba(255, 255, 255, 0.95) !important;
             border-color: #eae3d6 !important;
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.03);
         }
 
-        [data-theme="light"] .bg-slate-950\/60,
-        [data-theme="light"] .bg-slate-950\/80,
-        [data-theme="light"] .bg-slate-950\/95,
-        .light-theme .bg-slate-950\/60,
-        .light-theme .bg-slate-950\/80,
-        .light-theme .bg-slate-950\/95 {
-            background-color: #f5f0e6 !important;
+        [data-theme="light"] .bg-slate-850,
+        [data-theme="light"] .bg-slate-800,
+        .light-theme .bg-slate-850,
+        .light-theme .bg-slate-800 {
+            background-color: #f7f3ec !important;
             border-color: #eae3d6 !important;
         }
 
@@ -110,12 +157,12 @@
 
         [data-theme="light"] .text-slate-400,
         .light-theme .text-slate-400 {
-            color: #596780 !important;
+            color: #4a5568 !important;
         }
 
         [data-theme="light"] .text-slate-500,
         .light-theme .text-slate-500 {
-            color: #8c9ba5 !important;
+            color: #718096 !important;
         }
 
         [data-theme="light"] .border-slate-800,
@@ -127,22 +174,28 @@
             border-color: #e5ded2 !important;
         }
 
+        [data-theme="light"] .border-amber-400\/15,
         [data-theme="light"] .border-amber-400\/20,
         [data-theme="light"] .border-amber-400\/30,
         [data-theme="light"] .border-amber-500\/20,
         [data-theme="light"] .border-amber-500\/30,
+        .light-theme .border-amber-400\/15,
         .light-theme .border-amber-400\/20,
         .light-theme .border-amber-400\/30,
         .light-theme .border-amber-500\/20,
         .light-theme .border-amber-500\/30 {
-            border-color: rgba(168, 126, 34, 0.35) !important;
+            border-color: rgba(168, 126, 34, 0.3) !important;
         }
 
         [data-theme="light"] .bg-amber-400\/10,
+        [data-theme="light"] .bg-amber-400\/15,
+        [data-theme="light"] .bg-amber-400\/20,
         [data-theme="light"] .bg-amber-500\/10,
         .light-theme .bg-amber-400\/10,
+        .light-theme .bg-amber-400\/15,
+        .light-theme .bg-amber-400\/20,
         .light-theme .bg-amber-500\/10 {
-            background-color: rgba(168, 126, 34, 0.1) !important;
+            background-color: rgba(168, 126, 34, 0.08) !important;
         }
 
         [data-theme="light"] .text-amber-300,
@@ -150,6 +203,30 @@
         .light-theme .text-amber-300,
         .light-theme .text-amber-400 {
             color: #936b15 !important;
+        }
+
+        [data-theme="light"] .bg-indigo-950\/20,
+        .light-theme .bg-indigo-950\/20 {
+            background-color: rgba(79, 70, 229, 0.06) !important;
+            border-color: rgba(79, 70, 229, 0.2) !important;
+        }
+
+        [data-theme="light"] .bg-emerald-950\/20,
+        .light-theme .bg-emerald-950\/20 {
+            background-color: rgba(5, 150, 105, 0.06) !important;
+            border-color: rgba(5, 150, 105, 0.2) !important;
+        }
+
+        [data-theme="light"] .bg-rose-950\/20,
+        .light-theme .bg-rose-950\/20 {
+            background-color: rgba(225, 29, 72, 0.06) !important;
+            border-color: rgba(225, 29, 72, 0.2) !important;
+        }
+
+        [data-theme="light"] .bg-amber-950\/20,
+        .light-theme .bg-amber-950\/20 {
+            background-color: rgba(217, 119, 6, 0.06) !important;
+            border-color: rgba(217, 119, 6, 0.2) !important;
         }
 
         [data-theme="light"] input,

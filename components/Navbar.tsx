@@ -71,42 +71,62 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-slate-950/90 backdrop-blur-md border-b border-amber-400/15 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-18">
+    <header className={`sticky top-0 z-40 w-full backdrop-blur-md border-b transition-colors duration-200 ${
+      isDark
+        ? 'bg-slate-950/90 border-amber-400/15'
+        : 'bg-[#faf7f2]/95 border-amber-900/10 shadow-xs'
+    }`}>
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-18 gap-2">
           {/* Logo / Brand */}
           <div
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 cursor-pointer group select-none"
+            className="flex items-center gap-2.5 cursor-pointer group select-none shrink-0"
           >
-            <div className="w-9 h-9 rounded-xl bg-slate-900 border border-amber-400/30 flex items-center justify-center shadow-md group-hover:border-amber-400/60 transition-colors">
-              <span className="font-serif italic text-base font-bold text-amber-300">✦</span>
+            <div className={`w-9 h-9 rounded-xl border flex items-center justify-center shadow-sm transition-colors ${
+              isDark
+                ? 'bg-slate-900 border-amber-400/30 group-hover:border-amber-400/60'
+                : 'bg-white border-amber-500/30 group-hover:border-amber-600/60'
+            }`}>
+              <span className={`font-serif italic text-base font-bold ${
+                isDark ? 'text-amber-300' : 'text-amber-600'
+              }`}>✦</span>
             </div>
             <div>
-              <span className="font-serif font-bold text-base sm:text-lg text-amber-100 tracking-tight block leading-tight">
+              <span className={`font-serif font-bold text-base sm:text-lg block leading-tight ${
+                isDark ? 'text-amber-100' : 'text-slate-900'
+              }`}>
                 Tarot Reflection
               </span>
-              <span className="text-[10px] text-slate-400 uppercase tracking-[0.18em] font-medium block">
-                {isVi ? 'Tấm Gương Tự Phản Tỉnh' : 'Symbolic Mirror'}
+              <span className={`text-[11px] font-medium block leading-tight ${
+                isDark ? 'text-slate-400' : 'text-slate-500'
+              }`}>
+                {isVi ? 'Tấm gương tự phản tỉnh' : 'Symbolic Mirror'}
               </span>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 text-xs font-medium">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-xs xl:text-[13px] font-medium overflow-hidden">
             {primaryNavItems.map((item) => {
               const isActive = currentView === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-200 ${
+                  className={`px-2 xl:px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 whitespace-nowrap transition-all duration-200 shrink-0 ${
                     isActive
-                      ? 'bg-amber-400/15 text-amber-300 border border-amber-400/30 font-semibold'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
+                      ? isDark
+                        ? 'bg-amber-400/15 text-amber-300 border border-amber-400/30 font-semibold'
+                        : 'bg-amber-100 text-amber-900 border border-amber-300/80 font-semibold shadow-xs'
+                      : isDark
+                        ? 'text-slate-300 hover:text-white hover:bg-slate-900/80'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-amber-500/10'
                   }`}
                 >
-                  {item.icon}
+                  <span className={isActive ? (isDark ? 'text-amber-300' : 'text-amber-700') : (isDark ? 'text-slate-400' : 'text-slate-500')}>
+                    {item.icon}
+                  </span>
                   <span>{isVi ? item.labelVi : item.labelEn}</span>
                 </button>
               );
@@ -114,12 +134,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Actions: Theme Toggle, Language & Mobile Menu Toggle */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Quick theme toggle */}
             <button
               onClick={toggleTheme}
               title={isDark ? (isVi ? 'Chuyển sang giao diện Sáng' : 'Switch to Light Theme') : (isVi ? 'Chuyển sang giao diện Tối' : 'Switch to Dark Theme')}
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-amber-400/30 text-xs text-slate-300 flex items-center justify-center transition-colors"
+              className={`p-2 rounded-lg border text-xs flex items-center justify-center transition-colors ${
+                isDark
+                  ? 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-amber-300 hover:border-amber-400/30'
+                  : 'bg-white hover:bg-amber-50/80 border-slate-200 text-slate-700 hover:border-amber-400/40 shadow-xs'
+              }`}
               aria-label="Toggle theme"
             >
               {isDark ? (
@@ -133,16 +157,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={toggleLanguage}
               title={isVi ? 'Chuyển sang tiếng Anh' : 'Switch to Vietnamese'}
-              className="px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-amber-400/30 text-xs text-slate-300 flex items-center gap-1.5 transition-colors font-mono"
+              className={`px-2.5 py-1.5 rounded-lg border text-xs flex items-center gap-1.5 transition-colors font-mono font-bold ${
+                isDark
+                  ? 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-300 hover:border-amber-400/30'
+                  : 'bg-white hover:bg-amber-50/80 border-slate-200 text-slate-700 hover:border-amber-400/40 shadow-xs'
+              }`}
             >
-              <Globe className="w-3.5 h-3.5 text-amber-400" />
-              <span className="font-bold text-[11px] uppercase">{preferences.language}</span>
+              <Globe className={`w-3.5 h-3.5 ${isDark ? 'text-amber-400' : 'text-amber-600'}`} />
+              <span className="text-[11px] uppercase">{preferences.language}</span>
             </button>
 
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white"
+              className={`lg:hidden p-2 rounded-lg border transition-colors ${
+                isDark
+                  ? 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white'
+                  : 'bg-white border-slate-200 text-slate-700 hover:text-slate-900 shadow-xs'
+              }`}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -153,7 +185,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-slate-950/98 border-b border-amber-400/20 px-4 pt-3 pb-6 space-y-3">
+        <div className={`lg:hidden border-b px-4 pt-3 pb-6 space-y-3 transition-colors ${
+          isDark
+            ? 'bg-slate-950/98 border-amber-400/20'
+            : 'bg-[#faf7f2] border-amber-900/10 shadow-lg'
+        }`}>
           <div className="grid grid-cols-2 gap-1.5 pt-1">
             {primaryNavItems.map((item) => {
               const isActive = currentView === item.id;
@@ -163,11 +199,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => handleNavClick(item.id)}
                   className={`p-2.5 rounded-xl text-left text-xs flex items-center gap-2 transition-all ${
                     isActive
-                      ? 'bg-amber-400/15 text-amber-300 border border-amber-400/40 font-semibold'
-                      : 'bg-slate-900/60 text-slate-300 hover:bg-slate-900 border border-slate-800/80'
+                      ? isDark
+                        ? 'bg-amber-400/15 text-amber-300 border border-amber-400/40 font-semibold'
+                        : 'bg-amber-100 text-amber-900 border border-amber-300 font-semibold shadow-xs'
+                      : isDark
+                        ? 'bg-slate-900/60 text-slate-300 hover:bg-slate-900 border border-slate-800/80'
+                        : 'bg-white text-slate-700 hover:bg-amber-50/50 border border-slate-200 shadow-xs'
                   }`}
                 >
-                  <span className="text-amber-400">{item.icon}</span>
+                  <span className={isDark ? 'text-amber-400' : 'text-amber-600'}>{item.icon}</span>
                   <span className="truncate">{isVi ? item.labelVi : item.labelEn}</span>
                 </button>
               );

@@ -112,7 +112,7 @@ export const DecisionHelperView: React.FC<DecisionHelperViewProps> = ({
         <div className="max-w-xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-2">
+              <label className="block text-xs font-medium text-amber-300 mb-2">
                 {isVi ? 'Lựa chọn A (Con đường 1)' : 'Option A (Path 1)'}
               </label>
               <input
@@ -125,7 +125,7 @@ export const DecisionHelperView: React.FC<DecisionHelperViewProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-indigo-300 mb-2">
+              <label className="block text-xs font-medium text-indigo-300 mb-2">
                 {isVi ? 'Lựa chọn B (Con đường 2)' : 'Option B (Path 2)'}
               </label>
               <input

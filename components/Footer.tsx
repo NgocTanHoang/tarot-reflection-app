@@ -39,22 +39,22 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Col 2: Non-predictive charter */}
           <div className="space-y-2.5">
-            <h4 className="font-serif font-bold text-amber-300/90 uppercase tracking-widest text-[11px] flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+            <h4 className="font-serif font-bold text-amber-200 text-sm flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
               {isVi ? 'Cam kết Phi Tiên Tri' : 'Non-Predictive Charter'}
             </h4>
-            <p className="text-slate-400 text-xs leading-relaxed">
+            <p className="text-slate-400 text-xs sm:text-[13px] leading-relaxed">
               {isVi ? ETHICS_DISCLAIMER_VI : ETHICS_DISCLAIMER_EN}
             </p>
           </div>
 
           {/* Col 3: Crisis Support */}
           <div className="space-y-2.5">
-            <h4 className="font-serif font-bold text-amber-300/90 uppercase tracking-widest text-[11px] flex items-center gap-1.5">
-              <HeartHandshake className="w-3.5 h-3.5 text-rose-400" />
+            <h4 className="font-serif font-bold text-amber-200 text-sm flex items-center gap-1.5">
+              <HeartHandshake className="w-4 h-4 text-rose-400" />
               {isVi ? 'Hỗ Trợ Tâm Lý & Khủng Hoảng' : 'Support & Crisis Helplines'}
             </h4>
-            <p className="text-slate-400 text-xs leading-relaxed">
+            <p className="text-slate-400 text-xs sm:text-[13px] leading-relaxed">
               {isVi
                 ? 'Nếu bạn hoặc người thân đang trải qua thời khắc thử thách tâm lý, hãy tìm kiếm sự hỗ trợ chuyên môn kịp thời.'
                 : 'If you or a loved one is navigating emotional hardship, please connect with professional crisis support.'}

@@ -35,30 +35,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
         {/* Subtle radial ambient warmth */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl pointer-events-none -z-10" />
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-[11px] font-semibold uppercase tracking-widest">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-medium">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>{isVi ? 'Biểu Tượng • Phản Tỉnh • Quyền Tự Chủ' : 'Symbolism • Reflection • Autonomy'}</span>
+          <span>{isVi ? 'Biểu tượng • Phản tỉnh • Quyền tự chủ' : 'Symbolism • Reflection • Autonomy'}</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold text-amber-100 tracking-tight leading-[1.15]">
-          {isVi ? (
-            <>
-              Tarot không phải lời tiên tri. <br />
-              <span className="font-serif italic font-normal text-amber-300 block mt-2">
-                Tarot là tấm gương để phản tỉnh.
-              </span>
-            </>
-          ) : (
-            <>
-              Tarot is not prophecy. <br />
-              <span className="font-serif italic font-normal text-amber-300 block mt-2">
-                Tarot is a mirror for reflection.
-              </span>
-            </>
-          )}
-        </h1>
+        <div className="max-w-2xl mx-auto space-y-2.5">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-amber-100 leading-[1.25] tracking-normal">
+            {isVi ? 'Tarot không phải lời tiên tri.' : 'Tarot is not prophecy.'}
+          </h1>
+          <p className="text-xl sm:text-3xl md:text-4xl font-serif italic text-amber-300/95 leading-[1.3] tracking-normal font-normal">
+            {isVi ? 'Tarot là tấm gương để phản tỉnh.' : 'Tarot is a mirror for reflection.'}
+          </p>
+        </div>
 
-        <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed text-slate-300/90">
+        <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
           {isVi
             ? 'Rút một lá bài. Dừng lại một nhịp thở. Lắng nghe cảm xúc và suy ngẫm chân thật bên trong bạn để chủ động đưa ra những lựa chọn tỉnh thức.'
             : 'Draw a card. Pause for a quiet breath. Observe your honest inner landscape to navigate decisions with conscious clarity.'}
@@ -146,7 +137,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <Layers className="w-5 h-5" />
               </div>
               <div className="space-y-1.5">
-                <span className="text-[11px] font-bold text-amber-400/90 uppercase tracking-wider">
+                <span className="text-xs font-medium text-amber-400">
                   {isVi ? 'Phương thức chính' : 'Core Practice'}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-serif font-bold text-amber-100 group-hover:text-amber-200 transition-colors">
@@ -159,7 +150,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   : 'Choose 1-card, 3-card, or 5-card spreads. Receive 4-layer psychological interpretations paired with actionable micro-habits.'}
               </p>
             </div>
-            <div className="mt-8 flex items-center gap-1.5 text-xs font-bold text-amber-300 group-hover:translate-x-1 transition-transform">
+            <div className="mt-8 flex items-center gap-1.5 text-xs font-semibold text-amber-300 group-hover:translate-x-1 transition-transform">
               <span>{isVi ? 'Bắt đầu trải bài' : 'Begin Spread'}</span>
               <ArrowRight className="w-4 h-4" />
             </div>
@@ -175,20 +166,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <Scale className="w-5 h-5" />
               </div>
               <div className="space-y-1.5">
-                <span className="text-[11px] font-bold text-indigo-400 uppercase tracking-wider">
+                <span className="text-xs font-medium text-indigo-300">
                   {isVi ? 'So sánh song song' : 'Dual-Path Inquiry'}
                 </span>
                 <h3 className="text-lg sm:text-xl font-serif font-bold text-amber-100 group-hover:text-amber-200 transition-colors">
                   {isVi ? 'Soi Rọi Quyết Định' : 'Decision Mirror'}
                 </h3>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 {isVi
                   ? 'Đặt hai ngã rẽ A và B lên bàn cân biểu tượng để bóc tách động lực tiềm ẩn, nỗi sợ vô hình và giá trị neo giữ.'
                   : 'Examine two paths side-by-side to uncover hidden motivations, unacknowledged fears, and anchor values.'}
               </p>
             </div>
-            <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-indigo-300 group-hover:translate-x-1 transition-transform">
+            <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-indigo-300 group-hover:translate-x-1 transition-transform">
               <span>{isVi ? 'Cân nhắc hai lựa chọn' : 'Examine Dual Paths'}</span>
               <ArrowRight className="w-4 h-4" />
             </div>
@@ -204,20 +195,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <BookOpen className="w-5 h-5" />
               </div>
               <div className="space-y-1.5">
-                <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">
+                <span className="text-xs font-medium text-emerald-400">
                   {isVi ? 'Bách khoa toàn thư' : 'Encyclopedia'}
                 </span>
                 <h3 className="text-lg sm:text-xl font-serif font-bold text-amber-100 group-hover:text-amber-200 transition-colors">
                   {isVi ? 'Thư Viện 78 Lá Bài' : '78 Card Archetypes'}
                 </h3>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 {isVi
                   ? 'Tra cứu biểu tượng hình ảnh, câu hỏi gợi mở, chiều xuôi và chiều ngược của Bộ Ẩn Chính cùng 4 Bộ Ẩn Phụ.'
                   : 'Look up detailed visual symbolism, self-inquiry prompts, upright and reversed perspectives for all 78 cards.'}
               </p>
             </div>
-            <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-emerald-300 group-hover:translate-x-1 transition-transform">
+            <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-emerald-300 group-hover:translate-x-1 transition-transform">
               <span>{isVi ? 'Khám phá thư viện' : 'Browse Deck'}</span>
               <ArrowRight className="w-4 h-4" />
             </div>
@@ -233,20 +224,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <Sparkles className="w-5 h-5" />
               </div>
               <div className="space-y-1.5">
-                <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider">
+                <span className="text-xs font-medium text-amber-400">
                   {isVi ? 'Tri thức & Thực hành' : 'Philosophy & Practice'}
                 </span>
                 <h3 className="text-lg sm:text-xl font-serif font-bold text-amber-100 group-hover:text-amber-200 transition-colors">
                   {isVi ? 'Học Biểu Tượng & Tâm Lý Học' : 'Symbolic Mastery'}
                 </h3>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 {isVi
                   ? 'Tìm hiểu 4 nguyên tố (Lửa, Nước, Khí, Đất), Hành trình Chàng Khờ (Fool’s Journey) và thực hành bài tập tình huống.'
                   : 'Understand the 4 elements, the Hero’s psychological journey, and practical case reflections.'}
               </p>
             </div>
-            <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-amber-300 group-hover:translate-x-1 transition-transform">
+            <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-amber-300 group-hover:translate-x-1 transition-transform">
               <span>{isVi ? 'Bắt đầu học' : 'Learn Symbols'}</span>
               <ArrowRight className="w-4 h-4" />
             </div>

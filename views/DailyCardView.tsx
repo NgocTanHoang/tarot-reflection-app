@@ -100,7 +100,7 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
             <Flame className="w-4 h-4 text-amber-400" />
           </div>
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+            <span className="text-xs font-medium text-slate-400 block">
               {isVi ? 'Chuỗi Phản Tỉnh' : 'Reflection Streak'}
             </span>
             <span className="text-base sm:text-lg font-serif font-bold text-amber-200">
@@ -177,13 +177,17 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
             <div className="flex-grow space-y-5 text-slate-300 w-full">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">
-                  {todaysDailyCard.card.arcana} Arcana {todaysDailyCard.card.suit ? `• ${todaysDailyCard.card.suit}` : ''}
+                  {isVi 
+                    ? (todaysDailyCard.card.arcana === 'Major' 
+                        ? 'Bộ Ẩn Chính' 
+                        : `Bộ Ẩn Phụ • ${todaysDailyCard.card.suit === 'Wands' ? 'Gậy' : todaysDailyCard.card.suit === 'Cups' ? 'Cốc' : todaysDailyCard.card.suit === 'Swords' ? 'Kiếm' : 'Tiền'}`)
+                    : `${todaysDailyCard.card.arcana} Arcana ${todaysDailyCard.card.suit ? `• ${todaysDailyCard.card.suit}` : ''}`}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100 mt-1">
                   {isVi ? todaysDailyCard.card.nameVi : todaysDailyCard.card.name}
                   {todaysDailyCard.isReversed && (
                     <span className="text-xs font-sans font-medium text-indigo-300 ml-2 px-2.5 py-0.5 rounded-full bg-indigo-950/80 border border-indigo-500/30">
-                      {isVi ? 'Nội tâm' : 'Reversed'}
+                      {isVi ? 'Soi rọi nội tâm' : 'Reversed'}
                     </span>
                   )}
                 </h2>
@@ -191,9 +195,9 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
 
               {/* Reflection Prompt */}
               <div className="p-4 rounded-2xl bg-slate-950/70 border border-amber-400/20 space-y-1">
-                <h4 className="text-[11px] font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                <h4 className="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>{isVi ? 'Câu Hỏi Tự Vấn Ngày Hôm Nay' : 'Today’s Journaling Prompt'}</span>
+                  <span>{isVi ? 'Câu hỏi tự vấn hôm nay' : 'Today’s Journaling Prompt'}</span>
                 </h4>
                 <p className="font-serif italic text-amber-100 text-sm leading-relaxed">
                   "{todaysDailyCard.prompt}"
@@ -202,9 +206,9 @@ export const DailyCardView: React.FC<DailyCardViewProps> = ({
 
               {/* Micro-Action Seed */}
               <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
-                <h4 className="text-[11px] font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
+                <h4 className="text-xs font-semibold text-emerald-300 flex items-center gap-1.5">
                   <Lightbulb className="w-3.5 h-3.5" />
-                  <span>{isVi ? 'Hành Động Nhỏ Gợi Ý' : 'Suggested Daily Micro-Action'}</span>
+                  <span>{isVi ? 'Gợi ý hành động vi mô' : 'Suggested Daily Micro-Action'}</span>
                 </h4>
                 <p className="text-emerald-100 text-xs leading-relaxed">
                   {isVi
